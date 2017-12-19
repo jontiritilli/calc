@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator|Main</title>
+	<meta charset="utf-8">
+	<meta author="Jonathan Tiritilli">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">	 -->
+	<link rel="stylesheet" href="calculator_style.css">
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw=" crossorigin="anonymous"></script>
+	<script src='calculator_main.js'></script>
+</head>
+<body>
+	<header>Super Basic Calculator</header>
+	<section>
+		<div id='container'>
+			<div id='display'></div>
+			<div id='left_side'>
+				<button id='clear_btn' class='btn'>C</button>
+				<button id='clearEntry_btn' class='btn'>CE</button>
+				<div id='num_btn_container'>
+					<button class='num_btn btn'><span>1</span></button>
+					<button class='num_btn btn'><span>2</span></button>
+					<button class='num_btn btn'><span>3</span></button>
+					<button class='num_btn btn'><span>4</span></button>
+					<button class='num_btn btn'><span>5</span></button>
+					<button class='num_btn btn'><span>6</span></button>
+					<button class='num_btn btn'><span>7</span></button>
+					<button class='num_btn btn'><span>8</span></button>
+					<button class='num_btn btn'><span>9</span></button>
+					<button class='num_btn btn'><span>.</span></button>
+				</div>
+			</div>
+			<div id='right_side'>
+				<div id="op_btn_container"></div>
+				<button id='divide_btn' class='op_btn btn'><span>&divide;</span></button>
+				<button id='multiply_btn' class='op_btn btn'><span>x</span></button>
+				<button id='subtract_btn' class='op_btn btn'><span>-</span></button>
+				<button id='add_btn' class='op_btn btn'><span>+</span></button>
+				<button id='equal_btn' class='op_btn btn'><span>=</span></button>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
