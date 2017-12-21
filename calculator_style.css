@@ -41,6 +41,7 @@ section {
 	box-sizing: border-box;
 	font-size: 6vmin;
 	background-color: rgba(0,0,0,.7);
+	box-shadow: 1px -1px 10px black;
 	border-radius: 3vmin;
 }
 
@@ -65,7 +66,7 @@ section {
 	float: left;
 	box-sizing: border-box;
 }
-
+#equal_btn,
 .btn {
 	box-shadow: 1px -1px 10px black;
 	border: none;
@@ -131,7 +132,7 @@ section {
 	height: auto;
 	display: inline-block;
 }
-
+#equal_btn,
 .op_btn {
 	width: 12vmin;
 	height: 9vmin;
