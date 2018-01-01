@@ -29,14 +29,14 @@ function CalculatorApp() {
 	}
 
 	this.addClickHandlers = function(){
-		this.buttons.num_btn.on('click', this.makeArgs.bind(this));
-		this.buttons.op_btn.on('click', this.makeArgs.bind(this));
-		this.buttons.decimal_btn.on('click', this.decimalOp.bind(this));
+		this.buttons.num_btn.on('click', this.makeArgs.bind(this));//pass all number buttons through function makeArgs
+		this.buttons.op_btn.on('click', this.makeArgs.bind(this));//pass all operator buttons through function makeArgs
+		this.buttons.decimal_btn.on('click', this.decimalOp.bind(this));//pass decimal button through function decimalOp function
 		this.buttons.equal_btn.on('click', this.equalsFunction.bind(this));
 		this.buttons.clear.on('click', this.clear.bind(this));
 		this.buttons.clearEntry.on('click', this.clearEntry.bind(this));
 	}
-
+	//function to add decimals and update display. Limits decimal input to one per number set
 	this.decimalOp = function(){
 		var decimal = $(event.target).text()
 		console.log('button pressed',decimal);
@@ -45,15 +45,22 @@ function CalculatorApp() {
 		}
 		this.updateDisplay();
 	}
-
+	//attached to all buttons except equals. takes input and processes them to the correct variable
 	this.makeArgs = function(){
 		var buttonPressed = $(event.target).text();
 		console.log('button pressed',buttonPressed);
-		if(!isNaN(parseInt(buttonPressed))){
-			this.currentInput[0] += buttonPressed;
-		} else if (buttonPressed == '+'||buttonPressed == '÷'||buttonPressed == '-'||buttonPressed == 'x'){
-				this.input.operator[0] = buttonPressed;
-				this.currentInput = this.input.numSet2;
+		if(this.input.numSet2[0]!=='' && buttonPressed === '+'||buttonPressed === '÷'||buttonPressed === '-'||buttonPressed == 'x'){ //in combination with the equals function conditional, causing unwanted operation repeat
+			this.equalsFunction();
+			this.input.operator[0] = buttonPressed;
+			this.currentInput = this.input.numSet2;
+
+		} else {
+			if(!isNaN(parseInt(buttonPressed))){
+				this.currentInput[0] += buttonPressed;
+			} else if (buttonPressed === '+'||buttonPressed === '÷'||buttonPressed === '-'||buttonPressed === 'x'){
+					this.input.operator[0] = buttonPressed;
+					this.currentInput = this.input.numSet2;
+			}
 		}
 		this.updateDisplay();
 	}
@@ -61,13 +68,13 @@ function CalculatorApp() {
 	this.equalsFunction = function(){
 		if(this.input.numSet1[0]!=='' && this.input.numSet2[0]!==''){
 			this.doMath(this.input.numSet1, this.input.numSet2, this.input.operator);
-		} else if(this.input.numSet1[0]==='' && this.input.numSet2[0]!==''){
+		} else if(this.input.numSet1[0]==='' && this.input.numSet2[0]!==''){//partial operand
 			this.doMath(this.input.lastResult, this.input.numSet2, this.input.operator)
-		} else if(this.input.numSet1[0]==='' && this.input.numSet2[0]===''){
+		} else if(this.input.numSet1[0]==='' && this.input.numSet2[0]===''){//operation repeat
 			this.input.operator = this.input.lastOperator;
 			this.input.numSet2 = this.input.lastNumSet2;
 			this.doMath(this.input.lastResult, this.input.numSet2, this.input.operator)
-		} else if(this.input.operator!=='' && this.input.numSet1[0]==='' && this.input.operator[0]===''){
+		} else if(this.input.operator!=='' && this.input.numSet1[0]===''){
 			this.input.operator = this.input.lastOperator;
 			this.doMath(this.input.lastResult, this.input.numSet2, this.input.operator)
 		}
@@ -100,10 +107,10 @@ function CalculatorApp() {
 	this.updateDisplay = function(){
 		if(this.input.lastResult === Infinity){
 			this.$display.text('Error');
-		}  else if (this.input.lastResult[0] === ''){ //display current inputs
+		} else if (this.input.lastResult[0] === ''){ //display current inputs
 			this.$display.text(this.input.numSet1+this.input.operator+this.input.numSet2);
-		} else if (this.input.numSet1[0] === '' && this.input.numSet2[0] === ''){ //display result
-			this.$display.text(this.input.lastResult);
+		} else if (this.input.numSet1[0] === ''){ //display result
+			this.$display.text(this.input.lastResult+this.input.operator+this.input.numSet2);
 		} else if (this.input.numSet1[0] === ''){ //display for rollover functions
 			this.$display.text(this.input.lastResult+this.input.operator+this.input.numSet2);
 		}
