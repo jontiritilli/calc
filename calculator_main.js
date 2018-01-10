@@ -6,7 +6,7 @@ function CalculatorApp() {
 		numSet1: [''], //number set to the left of the operator
 		numSet2: [''], //number set to the right of the operator
 		operator: [''],
-		mathDone: null,
+		mathDone: false,
 		// result: [''] //most recent result of doMath
 	};
 
@@ -57,7 +57,7 @@ function CalculatorApp() {
 			this.currentInput = this.input.numSet2; //set currentInput to numset2. allows equals function to operate on result and any new input
 		} else {
 			if(!isNaN(parseInt(buttonPressed))){ //verify button pressed is a number, not an operator
-				this.input.mathDone = null;
+				this.input.mathDone = false;
 				this.currentInput[0] += buttonPressed; 
 			} else if (buttonPressed === '+'||buttonPressed === '÷'||buttonPressed === '-'||buttonPressed === 'x'){//check if button pressed was an operator
 					this.input.operator[0] = buttonPressed; //store operator pressed to the operator variable
@@ -68,14 +68,14 @@ function CalculatorApp() {
 	}
 
 	this.equalsFunction = function(){
-		if(this.input.mathDone === null && this.input.numSet2[0]!==''){ //if both numSets are NOT empty, doMath
+		if(this.input.mathDone === false && this.input.numSet2[0]!==''){ //if both numSets are NOT empty, doMath
 			this.doMath(this.input.numSet1, this.input.numSet2, this.input.operator);
-		} else if(this.input.mathDone !== null && this.input.numSet2[0]!==''){//if numSet1 is empty, partial operand
+		} else if(this.input.mathDone === true && this.input.numSet2[0]!==''){//if numSet1 is empty, partial operand
 			this.doMath(this.input.numSet1, this.input.numSet2, this.input.operator)
-		} else if(this.input.mathDone !== null && this.input.operator[0]!=='' && this.input.numSet2[0]===''){ //rollover operation, adds last result to last result if no inputs and an operator
+		} else if(this.input.mathDone === true && this.input.operator[0]!=='' && this.input.numSet2[0]===''){ //rollover operation, adds last result to last result if no inputs and an operator
 			this.input.numSet2 = this.input.lastNumSet2; //get last numset2 and assign to current numset2
 			this.doMath(this.input.numSet1, this.input.numSet1, this.input.operator)
-		} else if( this.input.mathDone !== null && this.input.operator[0]==='' && this.input.numSet2[0]===''){//operation repeat, perform last operation on result and last numset 2
+		} else if( this.input.mathDone === true && this.input.operator[0]==='' && this.input.numSet2[0]===''){//operation repeat, perform last operation on result and last numset 2
 			this.input.operator = this.input.lastOperator; //get last operator used and assign to current operator
 			this.input.numSet2 = this.input.lastNumSet2; //get last numset2 and assign to current numset2
 			this.doMath(this.input.numSet1, this.input.numSet2, this.input.operator)
@@ -101,7 +101,7 @@ function CalculatorApp() {
 				this.input.numSet1 = number1 / number2
 				break;
 			};
-		this.input.mathDone += 1;
+		this.input.mathDone = true;
 		this.updateInputs();
 		this.updateDisplay();
 		this.currentInput = this.input.numSet1; //reset input to numset 1 (left side of operator)
