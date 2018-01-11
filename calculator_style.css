@@ -47,6 +47,7 @@ section {
 		border-radius: 3vmin;
 	}
 }
+
 @media (max-width: 700px) {
 	#container {
 	    width: 90%;
@@ -59,6 +60,7 @@ section {
 		border-radius: 3vmin;
 	}
 }
+
 #display {
 	width: auto;
 	height: 15%;
@@ -147,9 +149,9 @@ section {
 	display: inline-block;
 }
 
-.num_btn:nth-child(10) {
+/*.num_btn:nth-child(10) {
     margin-left: 32%;
-}
+}*/
 
 #decimal_btn,
 .num_btn {
