@@ -30,7 +30,7 @@ class Calculator {
 	makeArgs() {
 		let buttonPressed = $(event.target).text(); //assign button clicked to variable
 		console.log('button pressed',buttonPressed); //log out button
-		if (!this.operator && !this.numSet2 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1){ //check to see if math should be performed by an operator btn, similar to a basic four function caclulator
+		if (!this.operator && !this.numSet2 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1){ //check to see if equals function should be performed by an operator btn
 			this.equals();
 			this.operator[0] += buttonPressed; //store operator, to be used for next operation
 			this.currentInput = this.numSet2; //set currentInput to numset2. allows equals function to operate on result and any new input
@@ -142,7 +142,7 @@ class Input{
 
 $(document).ready(() => {
 	calculator = new Calculator();
-	dispaly = new Display(calculator)
+	display = new Display(calculator)
 	calculator.addClickHandlers();
 }
 )
