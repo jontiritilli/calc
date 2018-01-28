@@ -1,7 +1,7 @@
-var calculator = new CalculatorApp();
+let calculator = new Calculator();
 $(document).ready(calculator.initializeApp.bind(calculator))
 
-function CalculatorApp() {
+function Calculator() {
 	this.input = { //create inputs to hold all arguments and operators
 		numSet1: [''], //number set to the left of the operator
 		numSet2: [''], //number set to the right of the operator
