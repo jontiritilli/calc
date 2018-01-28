@@ -1,149 +1,148 @@
-let calculator = new Calculator();
-$(document).ready(calculator.initializeApp.bind(calculator))
-
-function Calculator() {
-	this.input = { //create inputs to hold all arguments and operators
-		numSet1: [''], //number set to the left of the operator
-		numSet2: [''], //number set to the right of the operator
-		operator: [''],
-		mathDone: false,
-		// result: [''] //most recent result of doMath
-	};
-
-	this.currentInput = this.input.numSet1; //set current input that can be changed, either adding to numSet1 or numSet2
-
-	this.initializeApp = function(){
-		this.buttons = { //assign all jQuery targets to keys pairs
-		clear: $('#clear_btn'),
-		clearEntry: $('#clearEntry_btn'),
-		divide: $('#divide_btn'),
-		multiply: $('#multiply_btn'),
-		add: $('#add_btn'),
-		subtract: $('#subtract_btn'),
-		equal_btn: $('#equal_btn'),
-		num_btn: $('.num_btn'),
-		op_btn: $('.op_btn'),
-		decimal_btn: $('#decimal_btn')
-		};
-		this.$display = $('#display'); //assign display jQuery target to variable
-		this.addClickHandlers();
+class Calculator {
+	constructor () {
+		this.input = new Input;
+		this.display = new Display;
+		this.numSet1 = ['']; //number set to the left of the operator
+		this.operator = [''];
+		this.numSet2 = ['']; //number set to the right of the operator
+		this.mathDone = false;
+		this.currentInput = this.numSet1;//set current input that can be changed, either adding to numSet1 or numSet2
 	}
 
-	this.addClickHandlers = function(){
-		this.buttons.num_btn.on('click', this.makeArgs.bind(this)); //run makeArgs on number btn clicks
-		this.buttons.op_btn.on('click', this.makeArgs.bind(this)); //run makeArgs on operator btn clicks
-		this.buttons.decimal_btn.on('click', this.decimalOp.bind(this)); //run decimalOp on decimal btn clicks
-		this.buttons.equal_btn.on('click', this.equalsFunction.bind(this)); //run equals function on equalbtn click
-		this.buttons.clear.on('click', this.clear.bind(this)); //run clear function on click
-		this.buttons.clearEntry.on('click', this.clearEntry.bind(this)); //run clearEntry function on click
+	addClickHandlers() {
+		this.input.num_btn.on('click', () => { this.makeArgs(); this.display.updateDisplay() }); //run makeArgs on number btn clicks
+		this.input.op_btn.on('click', () => { this.makeArgs(); this.display.updateDisplay() }); //run makeArgs on operator btn clicks
+		this.input.decimal_btn.on('click', () => { this.decimalOp(); this.display.updateDisplay() }); //run decimalOp on decimal btn clicks
+		this.input.equal_btn.on('click', () => { this.equals(); this.display.updateDisplay() }); //run equals function on equalbtn click
+		this.input.clear_btn.on('click', () => { this.resetInputs(); this.display.displayToZero() }); //run clear function on click
+		this.input.clearEntry_btn.on('click', () => { this.clearEntry(); this.display.updateDisplay() }); //run clearEntry function on click
 	}
 
 	//function to add decimals and update display. Limits decimal input to one per number set
-	this.decimalOp = function(){
-		var decimal = $(event.target).text()
+	decimalOp() {
+		let decimal = $(event.target).text()
 		console.log('button pressed',decimal);
 		if(this.currentInput.indexOf('.')===-1){ //check if no decimal is present
-			this.currentInput[0] += decimal; //add decimal if true
+			this.currentInput.concat(decimal); //add decimal if true
 		}
-		this.updateDisplay();
 	}
 	//attached to all buttons except equals. takes input and processes them to the correct variable
-	this.makeArgs = function(){
-		var buttonPressed = $(event.target).text(); //assign button clicked to variable
+	makeArgs() {
+		let buttonPressed = $(event.target).text(); //assign button clicked to variable
 		console.log('button pressed',buttonPressed); //log out button
-		if(this.input.operator[0]!=='' && this.input.numSet2[0]!=='' && buttonPressed === '+'||buttonPressed === '÷'||buttonPressed === '-'||buttonPressed == 'x'){ //check to see if math should be performed by an operator btn, similar to a basic four function caclulator
-			this.equalsFunction();
-			this.input.operator[0] = buttonPressed; //store operator, to be used for next operation
-			this.currentInput = this.input.numSet2; //set currentInput to numset2. allows equals function to operate on result and any new input
+		if (!this.operator && !this.numSet2 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1){ //check to see if math should be performed by an operator btn, similar to a basic four function caclulator
+			this.equals();
+			this.operator[0] += buttonPressed; //store operator, to be used for next operation
+			this.currentInput = this.numSet2; //set currentInput to numset2. allows equals function to operate on result and any new input
 		} else {
 			if(!isNaN(parseInt(buttonPressed))){ //verify button pressed is a number, not an operator
-				this.input.mathDone = false;
+				this.mathDone = false;
 				this.currentInput[0] += buttonPressed; 
-			} else if (buttonPressed === '+'||buttonPressed === '÷'||buttonPressed === '-'||buttonPressed === 'x'){//check if button pressed was an operator
-					this.input.operator[0] = buttonPressed; //store operator pressed to the operator variable
-					this.currentInput = this.input.numSet2; //switch numset we are putting numbers in
+			} else if (['+', '÷', '-', 'x'].indexOf(buttonPressed)> -1){//check if button pressed was an operator
+					this.operator[0] += buttonPressed; //store operator pressed to the operator variable
+					this.currentInput = this.numSet2; //switch numset we are putting numbers in
 			}
 		}
-		this.updateDisplay();
 	}
 
-	this.equalsFunction = function(){
-		if(this.input.mathDone === false && this.input.numSet2[0]!==''){ //if both numSets are NOT empty, doMath
-			this.doMath(this.input.numSet1, this.input.numSet2, this.input.operator);
-		} else if(this.input.mathDone === true && this.input.numSet2[0]!==''){//if numSet1 is empty, partial operand
-			this.doMath(this.input.numSet1, this.input.numSet2, this.input.operator)
-		} else if(this.input.mathDone === true && this.input.operator[0]!=='' && this.input.numSet2[0]===''){ //rollover operation, adds last result to last result if no inputs and an operator
-			this.input.numSet2 = this.input.lastNumSet2; //get last numset2 and assign to current numset2
-			this.doMath(this.input.numSet1, this.input.numSet1, this.input.operator)
-		} else if( this.input.mathDone === true && this.input.operator[0]==='' && this.input.numSet2[0]===''){//operation repeat, perform last operation on result and last numset 2
-			this.input.operator = this.input.lastOperator; //get last operator used and assign to current operator
-			this.input.numSet2 = this.input.lastNumSet2; //get last numset2 and assign to current numset2
-			this.doMath(this.input.numSet1, this.input.numSet2, this.input.operator)
+	equals() {
+		if(this.mathDone === false && this.numSet2){ //if both numSets are NOT empty, doMath
+			this.doMath(this.numSet1, this.numSet2, this.operator);
+		} else if(this.mathDone === true && this.numSet2){//if numSet1 is empty, partial operand
+			this.doMath(this.numSet1, this.numSet2, this.operator)
+		} else if(this.mathDone === true && this.operator && this.numSet2){ //rollover operation, adds last result to last result if no inputs and an operator
+			this.numSet2 = this.lastNumSet2; //get last numset2 and assign to current numset2
+			this.doMath(this.numSet1, this.numSet1, this.operator)
+		} else if(this.mathDone === true && !this.operator && !this.numSet2){//operation repeat, perform last operation on result and last numset 2
+			this.operator = this.lastOperator; //get last operator used and assign to current operator
+			this.numSet2 = this.lastNumSet2; //get last numset2 and assign to current numset2
+			this.doMath(this.numSet1, this.numSet2, this.operator)
 		}
 	}
 
-	this.doMath = function(number1, number2, operator){
-		this.input.numSet1 = ['']; //reset result
-		number1 = parseFloat(number1); 
-		number2 = parseFloat(number2);
-		operator = operator.join(''); //this is necessary, but why?? What is it doing?
-		switch(operator){ //checks what operator was used, performs operation and stores result
+	doMath(number1, number2, operator){
+		let num1 = parseFloat(number1); 
+		let num2 = parseFloat(number2);
+		let op = operator.toString();
+		switch(op){ //checks what operator was used, performs operation and stores result
 			case '+':
-				this.input.numSet1 = number1 + number2
+				this.numSet1 = num1 + num2
 				break;
 			case '-':
-				this.input.numSet1 = number1 - number2
+				this.numSet1 = num1 - num2
 				break;
 			case 'x':
-				this.input.numSet1 = number1 * number2
+				this.numSet1 = num1 * num2
 				break;
 			case '÷':
-				this.input.numSet1 = number1 / number2
+				this.numSet1 = num1 / num2
 				break;
 			};
-		this.input.mathDone = true;
+		this.mathDone = true;
 		this.updateInputs();
-		this.updateDisplay();
-		this.currentInput = this.input.numSet1; //reset input to numset 1 (left side of operator)
+		this.currentInput = this.numSet1; //reset input to numset 1 (left side of operator)
 	}
+	updateInputs() {
+		this.lastNumSet2 = this.numSet2;
+		this.lastOperator = this.operator;
+		// this.input.numSet1 = [''];
+		this.numSet2 = [''];
+		this.operator = [''];
+	}
+	resetInputs() {
+		this.numSet1 = ['']; //number set to the left of the operator
+		this.operator = [''];
+		this.numSet2 = ['']; //number set to the right of the operator
+		this.mathDone = false;
+		this.currentInput = this.numSet1;//set current input that can be changed, either adding to numSet1 or numSet2
+	}
+}
 
-	this.updateDisplay = function(){
-		if(isNaN(this.input.numSet1) || this.input.numSet1 === Infinity){ //if result is infinity, display an error
+class Display{
+	constructor(){
+		this.$display = $('#display'); 
+	}
+	updateDisplay() {
+		if (isNaN(calculator.numSet1) || calculator.numSet1 === Infinity){ //if result is infinity, display an error
 			this.$display.text('Error');
 		// } else if (this.input.numSet1[0] === ''){ //if result is empty
 		// 	this.$display.text(this.input.numSet1+this.input.operator+this.input.numSet2);
-		} else if (this.input.numSet1[0] === ''){ //display result and additional
-			this.$display.text(this.input.numSet1+this.input.operator+this.input.numSet2);
-		} else if (this.input.numSet1[0] !== '' && this.input.numSet1[0] !== ''){ //display for rollover functions
-			this.$display.text(this.input.numSet1+this.input.operator+this.input.numSet2);
+		} else if (calculator.numSet1){ //display result and additional
+			this.$display.text(calculator.numSet1 + calculator.operator + calculator.numSet2);
+		} else if (!calculator.numSet1 && !calculator.numSet1){ //display for rollover functions
+			this.$display.text(calculator.numSet1 + calculator.operator + calculator.numSet2);
 		}
 	}
 
-	this.updateInputs = function(){
-		this.input.lastNumSet2 = this.input.numSet2;
-		this.input.lastOperator = this.input.operator;
-		// this.input.numSet1 = [''];
-		this.input.numSet2 = [''];
-		this.input.operator = [''];
-	}
-
-	this.clearDisplay = function(){
+	displayToZero(){
 		this.$display.text('0');
 	}
 
-	this.clear = function(){
-		this.input.numSet1 = [''];
-		this.input.numSet2 = [''];
-		this.input.operator = [''];
-		// this.input.result = [''];
-		this.input.lastNumSet2 = [''];
-		this.input.LastOperator = [''];
-		this.currentInput = this.input.numSet1;
-		this.clearDisplay();
+	clear(){
+		calculator = new Calculator();
+		this.displayToZero();
 	}
 
-	this.clearEntry = function(){
-		this.currentInput[0] = '';
+	clearEntry(){
+		Calculator.currentInput = [];
 		this.updateDisplay();
 	}
 }
+
+class Input{
+	constructor() {
+		this.clear_btn = $('#clear_btn');
+		this.clearEntry_btn = $('#clearEntry_btn');
+		this.equal_btn = $('#equal_btn');
+		this.num_btn = $('.num_btn');
+		this.op_btn = $('.op_btn');
+		this.decimal_btn = $('#decimal_btn');
+	}
+}
+
+$(document).ready(() => {
+	calculator = new Calculator();
+	dispaly = new Display(calculator)
+	calculator.addClickHandlers();
+}
+)
