@@ -5,40 +5,62 @@
 	<meta charset="utf-8">
 	<meta author="Jonathan Tiritilli">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">	 -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">	
 	<link rel="stylesheet" href="style.css">
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw=" crossorigin="anonymous"></script>
 	<script src='main.js'></script>
 </head>
 <body>
-	<header>Super Fantastic Calculator</header>
+	<div class="container">
+		<header>Super Fantastic Calculator</header>
+	</div>
 	<div>
-		<div id='container'>
-			<div id='display'>0</div>
-			<div id="inputContainer">
-				<div id='left_side'>
-					<button id='clear_btn' class='btn'>C</button>
-					<button id='clearEntry_btn' class='btn'>CE</button>
-					<div id='num_btn_container'>
-						<button class='num_btn btn'>7</button>
-						<button class='num_btn btn'>8</button>
-						<button class='num_btn btn'>9</button>
-						<button class='num_btn btn'>4</button>
-						<button class='num_btn btn'>5</button>
-						<button class='num_btn btn'>6</button>
-						<button class='num_btn btn'>1</button>
-						<button class='num_btn btn'>2</button>
-						<button class='num_btn btn'>3</button>
-						<button id='decimal_btn'>.</button>
-						<button class='num_btn btn'>0</button>
+		<div class='container'>
+			<div class="row">
+				<div class='container view col-12'>
+					<div class="row">
+						<div id='small-display' class='col-12'>0</div>
+					</div>
+					<div class="row">
+						<div id='display' class='col-12'>0</div>
 					</div>
 				</div>
-				<div id='right_side'>
-					<button id='divide_btn' class='op_btn btn'><span>&divide;</span></button>
-					<button id='multiply_btn' class='op_btn btn'><span>x</span></button>
-					<button id='subtract_btn' class='op_btn btn'><span>-</span></button>
-					<button id='add_btn' class='op_btn btn'><span>+</span></button>
-					<button id='equal_btn'><span>=</span></button>
+				<div class='container inputs'>
+					<div class='row'>
+						<div class='col-9'>
+							<div class='row'>
+								<button id='clear_btn' class='btn col-6 btn-outline-danger'>Clear</button>
+								<button id='clearEntry_btn' class='btn col-6 btn-outline-warning'>CE</button>
+							</div>
+							<div class='row'>
+								<button class='num_btn col-4 btn btn-outline-secondary'>7</button>
+								<button class='num_btn col-4 btn btn-outline-secondary'>8</button>
+								<button class='num_btn col-4 btn btn-outline-secondary'>9</button>
+							</div>	
+							<div class='row'>
+								<button class='num_btn col-4 btn btn-outline-secondary'>4</button>
+								<button class='num_btn col-4 btn btn-outline-secondary'>5</button>
+								<button class='num_btn col-4 btn btn-outline-secondary'>6</button>
+							</div>	
+							<div class='row'>
+								<button class='num_btn col-4 btn btn-outline-secondary'>1</button>
+								<button class='num_btn col-4 btn btn-outline-secondary'>2</button>
+								<button class='num_btn col-4 btn btn-outline-secondary'>3</button>
+							</div>	
+							<div class='row'>
+								<button class='num_btn col-4 btn btn-outline-secondary'>0</button>
+								<button id='decimal_btn' class='btn col-4 btn-outline-secondary'>.</button>
+								<button id='plus_minus' class='btn col-4 btn-outline-secondary'>+/-</button>
+							</div>	
+						</div>
+						<div class='col-3'>
+							<button id='divide_btn' class='op_btn col-12 btn btn-outline-secondary'><span>&divide;</span></button>
+							<button id='multiply_btn' class='op_btn col-12 btn btn-outline-secondary'><span>x</span></button>
+							<button id='subtract_btn' class='op_btn col-12 btn btn-outline-secondary'><span>-</span></button>
+							<button id='add_btn' class='op_btn btn col-12 btn-outline-secondary'><span>+</span></button>
+							<button id='equal_btn' class='btn col-12 btn-outline-success'><span>=</span></button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

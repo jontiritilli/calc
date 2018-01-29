@@ -13,7 +13,7 @@ class Calculator {
 		this.input.num_btn.on('click', () => { this.makeArgs(); this.display.updateDisplay() }); //run makeArgs on number btn clicks
 		this.input.op_btn.on('click', () => { this.makeArgs(); this.display.updateDisplay() }); //run makeArgs on operator btn clicks
 		this.input.decimal_btn.on('click', () => { this.decimalOp(); this.display.updateDisplay() }); //run decimalOp on decimal btn clicks
-		this.input.equal_btn.on('click', () => { this.equals(); this.display.updateDisplay() }); //run equals function on equalbtn click
+		this.input.equal_btn.on('click', () => { this.doMath(); this.display.updateDisplay() }); //run equals function on equalbtn click
 		this.input.clear_btn.on('click', () => { this.resetInputs(); this.display.displayToZero() }); //run clear function on click
 		this.input.clearEntry_btn.on('click', () => { this.clearEntry(); this.display.updateDisplay() }); //run clearEntry function on click
 	}
@@ -29,36 +29,53 @@ class Calculator {
 	//attached to all buttons except equals. takes input and processes them to the correct variable
 	makeArgs() {
 		let buttonPressed = $(event.target).text(); //assign button clicked to variable
-		console.log('button pressed',buttonPressed); //log out button
-		if (!this.operator && !this.numSet2 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1){ //check to see if equals function should be performed by an operator btn
-			this.equals();
+		console.log('button pressed', buttonPressed); //log button pressed
+		if (!this.operator && !this.numSet2 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) { //check to see if equals function should be performed by an operator btn
+			this.doMath();
 			this.operator[0] += buttonPressed; //store operator, to be used for next operation
 			this.currentInput = this.numSet2; //set currentInput to numset2. allows equals function to operate on result and any new input
 		} else {
-			if(!isNaN(parseInt(buttonPressed))){ //verify button pressed is a number, not an operator
+			if (!isNaN(parseInt(buttonPressed))) { //verify button pressed is a number, not an operator
 				this.mathDone = false;
-				this.currentInput[0] += buttonPressed; 
-			} else if (['+', '÷', '-', 'x'].indexOf(buttonPressed)> -1){//check if button pressed was an operator
-					this.operator[0] += buttonPressed; //store operator pressed to the operator variable
-					this.currentInput = this.numSet2; //switch numset we are putting numbers in
+				this.currentInput[0] += buttonPressed;
+			} else if (['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) {//check if button pressed was an operator
+				this.operator[0] += buttonPressed; //store operator pressed to the operator variable
+				this.currentInput = this.numSet2; //switch numset we are putting numbers in
 			}
 		}
 	}
+	// makeArgs() {
+	// 	let buttonPressed = $(event.target).text(); //assign button clicked to variable
+	// 	console.log('button pressed',buttonPressed); //log out button
+	// 	if (!this.operator && !this.numSet2 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1){ //check to see if equals function should be performed by an operator btn
+	// 		this.equals();
+	// 		this.operator[0] += buttonPressed; //store operator, to be used for next operation
+	// 		this.currentInput = this.numSet2; //set currentInput to numset2. allows equals function to operate on result and any new input
+	// 	} else {
+	// 		if(!isNaN(parseInt(buttonPressed))){ //verify button pressed is a number, not an operator
+	// 			this.mathDone = false;
+	// 			this.currentInput[0] += buttonPressed; 
+	// 		} else if (['+', '÷', '-', 'x'].indexOf(buttonPressed)> -1){//check if button pressed was an operator
+	// 				this.operator[0] += buttonPressed; //store operator pressed to the operator variable
+	// 				this.currentInput = this.numSet2; //switch numset we are putting numbers in
+	// 		}
+	// 	}
+	// }
 
-	equals() {
-		if(this.mathDone === false && this.numSet2){ //if both numSets are NOT empty, doMath
-			this.doMath(this.numSet1, this.numSet2, this.operator);
-		} else if(this.mathDone === true && this.numSet2){//if numSet1 is empty, partial operand
-			this.doMath(this.numSet1, this.numSet2, this.operator)
-		} else if(this.mathDone === true && this.operator && this.numSet2){ //rollover operation, adds last result to last result if no inputs and an operator
-			this.numSet2 = this.lastNumSet2; //get last numset2 and assign to current numset2
-			this.doMath(this.numSet1, this.numSet1, this.operator)
-		} else if(this.mathDone === true && !this.operator && !this.numSet2){//operation repeat, perform last operation on result and last numset 2
-			this.operator = this.lastOperator; //get last operator used and assign to current operator
-			this.numSet2 = this.lastNumSet2; //get last numset2 and assign to current numset2
-			this.doMath(this.numSet1, this.numSet2, this.operator)
-		}
-	}
+	// equals() {
+	// 	if(this.mathDone === false && this.numSet2){ //if both numSets are NOT empty, doMath
+	// 		this.doMath(this.numSet1, this.numSet2, this.operator);
+	// 	} else if(this.mathDone === true && this.numSet2){//if numSet1 is empty, partial operand
+	// 		this.doMath(this.numSet1, this.numSet2, this.operator)
+	// 	} else if(this.mathDone === true && this.operator && this.numSet2){ //rollover operation, adds last result to last result if no inputs and an operator
+	// 		this.numSet2 = this.lastNumSet2; //get last numset2 and assign to current numset2
+	// 		this.doMath(this.numSet1, this.numSet1, this.operator)
+	// 	} else if(this.mathDone === true && !this.operator && !this.numSet2){//operation repeat, perform last operation on result and last numset 2
+	// 		this.operator = this.lastOperator; //get last operator used and assign to current operator
+	// 		this.numSet2 = this.lastNumSet2; //get last numset2 and assign to current numset2
+	// 		this.doMath(this.numSet1, this.numSet2, this.operator)
+	// 	}
+	// }
 
 	doMath(number1, number2, operator){
 		let num1 = parseFloat(number1); 
