@@ -9,26 +9,15 @@ class Calculator {
 		this.currentInput = this.numSet1;//set current input that can be changed, either adding to numSet1 or numSet2
 	}
 
-	addClickHandlers() {
-		this.input.num_btn.on('click', () => { this.makeArgs(); this.display.updateDisplay() }); //run makeArgs on number btn clicks
-		this.input.op_btn.on('click', () => { this.makeArgs(); this.display.updateDisplay() }); //run makeArgs on operator btn clicks
-		this.input.decimal_btn.on('click', () => { this.decimalOp(); this.display.updateDisplay() }); //run decimalOp on decimal btn clicks
-		this.input.equal_btn.on('click', () => { this.doMath(); this.display.updateDisplay() }); //run equals function on equalbtn click
-		this.input.clear_btn.on('click', () => { this.resetInputs(); this.display.displayToZero() }); //run clear function on click
-		this.input.clearEntry_btn.on('click', () => { this.clearEntry(); this.display.updateDisplay() }); //run clearEntry function on click
-	}
-
 	//function to add decimals and update display. Limits decimal input to one per number set
-	decimalOp() {
-		let decimal = $(event.target).text()
+	decimalOp(decimal) {
 		console.log('button pressed',decimal);
 		if(this.currentInput.indexOf('.')===-1){ //check if no decimal is present
 			this.currentInput.concat(decimal); //add decimal if true
 		}
 	}
 	//attached to all buttons except equals. takes input and processes them to the correct variable
-	makeArgs() {
-		let buttonPressed = $(event.target).text(); //assign button clicked to variable
+	makeArgs(buttonPressed) {
 		console.log('button pressed', buttonPressed); //log button pressed
 		if (!this.operator && !this.numSet2 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) { //check to see if equals function should be performed by an operator btn
 			this.doMath();
@@ -155,11 +144,18 @@ class Input{
 		this.op_btn = $('.op_btn');
 		this.decimal_btn = $('#decimal_btn');
 	}
+
+	addClickHandlers() {
+		this.input.num_btn.on('click', () => { this.makeArgs($(event.target).text()); this.display.updateDisplay() }); //run makeArgs on number btn clicks
+		this.input.op_btn.on('click', () => { this.makeArgs($(event.target).text()); this.display.updateDisplay() }); //run makeArgs on operator btn clicks
+		this.input.decimal_btn.on('click', () => { this.decimalOp($(event.target).text()); this.display.updateDisplay() }); //run decimalOp on decimal btn clicks
+		this.input.equal_btn.on('click', () => { this.doMath(); this.display.updateDisplay() }); //run equals function on equalbtn click
+		this.input.clear_btn.on('click', () => { this.resetInputs(); this.display.displayToZero() }); //run clear function on click
+		this.input.clearEntry_btn.on('click', () => { this.clearEntry(); this.display.updateDisplay() }); //run clearEntry function on click
+	}
 }
 
 $(document).ready(() => {
 	calculator = new Calculator();
-	display = new Display(calculator)
-	calculator.addClickHandlers();
 }
 )
