@@ -17,9 +17,9 @@
 	<div>
 		<div class='container'>
 			<div class="row">
-				<div class='container view col-12'>
+				<div class='container view col-12 pull-left'>
 					<div class="row">
-						<div id='small-display' class='col-12'>0</div>
+						<div id='small-display' class='col-12'></div>
 					</div>
 					<div class="row">
 						<div id='display' class='col-12'>0</div>
@@ -27,38 +27,57 @@
 				</div>
 				<div class='container inputs'>
 					<div class='row'>
-						<div class='col-9'>
+						<div class='col-6'>
 							<div class='row'>
-								<button id='clear_btn' class='btn col-6 btn-outline-danger'>Clear</button>
-								<button id='clearEntry_btn' class='btn col-6 btn-outline-warning'>CE</button>
+								<button id='clear_btn' class='btn col-6 btn-outline-danger my-2'>Clear</button>
+								<button id='clearEntry_btn' class='btn col-6 btn-outline-warning my-2'>CE</button>
 							</div>
 							<div class='row'>
-								<button class='num_btn col-4 btn btn-outline-secondary'>7</button>
-								<button class='num_btn col-4 btn btn-outline-secondary'>8</button>
-								<button class='num_btn col-4 btn btn-outline-secondary'>9</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>7</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>8</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>9</button>
 							</div>	
 							<div class='row'>
-								<button class='num_btn col-4 btn btn-outline-secondary'>4</button>
-								<button class='num_btn col-4 btn btn-outline-secondary'>5</button>
-								<button class='num_btn col-4 btn btn-outline-secondary'>6</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>4</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>5</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>6</button>
 							</div>	
 							<div class='row'>
-								<button class='num_btn col-4 btn btn-outline-secondary'>1</button>
-								<button class='num_btn col-4 btn btn-outline-secondary'>2</button>
-								<button class='num_btn col-4 btn btn-outline-secondary'>3</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>1</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>2</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>3</button>
 							</div>	
 							<div class='row'>
-								<button class='num_btn col-4 btn btn-outline-secondary'>0</button>
-								<button id='decimal_btn' class='btn col-4 btn-outline-secondary'>.</button>
-								<button id='plus_minus' class='btn col-4 btn-outline-secondary'>+/-</button>
+								<button class='num_btn col-4 btn btn-outline-secondary my-2'>0</button>
+								<button id='decimal_btn' class='btn col-4 btn-outline-secondary my-2'>.</button>
+								<button id='plus_minus' class='btn col-4 btn-outline-secondary my-2'>+/-</button>
 							</div>	
 						</div>
 						<div class='col-3'>
-							<button id='divide_btn' class='op_btn col-12 btn btn-outline-secondary'><span>&divide;</span></button>
-							<button id='multiply_btn' class='op_btn col-12 btn btn-outline-secondary'><span>x</span></button>
-							<button id='subtract_btn' class='op_btn col-12 btn btn-outline-secondary'><span>-</span></button>
-							<button id='add_btn' class='op_btn btn col-12 btn-outline-secondary'><span>+</span></button>
-							<button id='equal_btn' class='btn col-12 btn-outline-success'><span>=</span></button>
+							<div class='row'>
+								<button id='divide_btn' class='op_btn col-12 btn btn-outline-info my-2'>&divide;</button>
+							</div>
+							<div class='row'>
+								<button id='multiply_btn' class='op_btn col-12 btn btn-outline-info my-2'>x</button>
+							</div>
+							<div class='row'>
+								<button id='subtract_btn' class='op_btn col-12 btn btn-outline-info my-2'>-</button>
+							</div>
+							<div class='row'>
+								<button id='add_btn' class='op_btn btn col-12 btn-outline-info my-2'>+</button>
+							</div>
+							<div class='row'>
+								<button id='equal_btn' class='btn col-12 btn-outline-success my-2'>=</button>
+							</div>
+						</div>
+						<div class='col-3 history'>
+							<div class="row">
+								<div class="col-12">
+									<div class="row">
+										<span>history:</span>
+									</div>
+								</div>
+							</div>	
 						</div>
 					</div>
 				</div>

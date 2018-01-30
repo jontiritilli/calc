@@ -38,6 +38,17 @@ header {
 	border-radius: 1vmin;
 }
 
+.history {
+	font-size: 3vmin;
+	background-color: rgba(0, 0, 0, .8);
+	color: #F6E006FF;
+	text-align: right;
+	border-radius: 1vmin;
+}
+.list {
+	overflow: hidden;
+}
+
 #small-display {
 	font-size: 4vmin;
 	color: #F6E006FF;
