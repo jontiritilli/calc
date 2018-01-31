@@ -38,25 +38,12 @@ header {
 	border-radius: 1vmin;
 }
 
-.history {
+.log {
 	font-size: 3vmin;
 	background-color: rgba(0, 0, 0, .8);
 	color: #F6E006FF;
-	text-align: right;
 	border-radius: 1vmin;
-}
-.list {
-	overflow: hidden;
-}
-
-#small-display {
-	font-size: 4vmin;
-	color: #F6E006FF;
-}
-
-#inputs {
-	height: 85%;
-	width: 100%;
+	overflow-y: auto;
 }
 
 .btn:hover {
@@ -66,9 +53,23 @@ header {
 .btn {
 	height: 20%;
 	color: white;
-	margin-top: 1%;
 	background-color: rgba(0,0,0,.4);
 	font-size: 4vmin;
 	text-shadow: 3px 3px 10px black;
 	box-shadow: 1px -1px 10px black;
+}
+
+.history {
+	font-size: 2vmin;
+}
+.clear_history:hover {
+	cursor: pointer;
+}
+
+.clear_history {
+	font-size: 2vmin;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%);
+	position: absolute;
 }
