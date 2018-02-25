@@ -39,37 +39,46 @@ header {
 }
 
 .log {
+	height: 100%;
 	font-size: 3vmin;
 	background-color: rgba(0, 0, 0, .8);
 	color: #F6E006FF;
 	border-radius: 1vmin;
-	overflow-y: auto;
 }
 
 .btn:hover {
 	cursor: pointer;
 }
 
-.btn {
+.num_btn,
+.op_btn,
+#clearEntry_btn,
+#clear_btn {
 	height: 20%;
-	color: white;
-	background-color: rgba(0,0,0,.4);
+	/* color: white;
+	background-color: rgba(0,0,0,.4); */
 	font-size: 4vmin;
-	text-shadow: 3px 3px 10px black;
-	box-shadow: 1px -1px 10px black;
+	/* text-shadow: 3px 3px 10px black;
+	box-shadow: 1px -1px 10px black; */
 }
 
 .history {
-	font-size: 2vmin;
+	font-size: 1vmin;
+	overflow-y: auto;
 }
+
+.clear-hist {
+	margin-bottom: auto;
+}
+
 .clear_history:hover {
 	cursor: pointer;
 }
 
-.clear_history {
+/* .clear_history {
 	font-size: 2vmin;
 	bottom: 0;
 	left: 50%;
 	transform: translate(-50%);
 	position: absolute;
-}
+} */

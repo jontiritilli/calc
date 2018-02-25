@@ -19,9 +19,11 @@ class Model {
 		console.log('button pressed', buttonPressed); //log button pressed
 		if (!isNaN(parseInt(buttonPressed))) { //verify button pressed is a number, not an operator
 			this.currentInput[0] += buttonPressed;
-		} else if (buttonPressed === '.' && this.currentInput.indexOf('.')===-1){ //check if no decimal is present
+		}
+		if (buttonPressed === '.' && this.currentInput[0].indexOf('.') === -1){ //check if no decimal is present
 			this.currentInput[0] += buttonPressed; //add decimal if true
-		} else if (this.num1[0].length > 0 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) {//check if button pressed was an operator
+		} 
+		if (this.num1[0].length > 0 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) {//check if button pressed was an operator
 			this.operator[0] = buttonPressed; //store operator pressed to the operator variable
 			this.currentInput = this.num2; //switch num we are putting numbers in
 		}
@@ -94,9 +96,9 @@ class View{
 		const { num1, op, num2, result } = num;
 		if (num1[0].length > 0 && op[0].length > 0 && num2[0].length > 0 && result[0].length > 0) {
 			let h5 = $('<h5>');
-			h5.addClass('text-center');
 			h5.text(`${num1} ${op} ${num2} = ${result}`);
 			this.history.append(h5)
+			this.mainDisplay.text(result);
 		}
 	}
 	clearHistory() {
@@ -104,6 +106,9 @@ class View{
 	}
 	displayToZero(){
 		this.mainDisplay.text('0');
+	}
+	displayToResult(num){
+		this.mainDisplay.text(num.result);
 	}
 }
 
@@ -133,7 +138,7 @@ class Controller{
 				this.calculator.equals()
 			);
 			this.calculator.resetInputs();
-			this.display.displayToZero();
+			// this.display.displayToZero();
 		});
 		$('#clear_btn').on('click', () => {
 			this.calculator.resetInputs(); 
