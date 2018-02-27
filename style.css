@@ -23,11 +23,9 @@ body {
     background-repeat: no-repeat;
 }
 
-header {
+.head {
 	font-size: 8vmin;
-	text-align: center;
 	color: #F6E006FF;
-	text-shadow: 3px 3px 10px black;
 }
 
 .view {
@@ -37,48 +35,64 @@ header {
 	text-align: right;
 	border-radius: 1vmin;
 }
-
 .log {
-	height: 100%;
+	position: relative;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	height: 32vh;
 	font-size: 3vmin;
 	background-color: rgba(0, 0, 0, .8);
 	color: #F6E006FF;
-	border-radius: 1vmin;
+	border-radius: 2%;
 }
-
-.btn:hover {
-	cursor: pointer;
+.history_header {
+	position: absolute;
+	font-size: 3vmin;
+	text-decoration: underline;
 }
-
-.num_btn,
-.op_btn,
-#clearEntry_btn,
-#clear_btn {
-	height: 20%;
-	/* color: white;
-	background-color: rgba(0,0,0,.4); */
-	font-size: 4vmin;
-	/* text-shadow: 3px 3px 10px black;
-	box-shadow: 1px -1px 10px black; */
-}
-
 .history {
-	font-size: 1vmin;
-	overflow-y: auto;
+	overflow: auto;
+	margin-top: 15%;
+	height: 70%;
 }
-
-.clear-hist {
-	margin-bottom: auto;
+.history_item {
+	margin: 0;
+	font-size: 3vmin;
 }
-
+.clear_history {
+	position: absolute;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .8) !important;
+	margin-bottom: 20px;
+}
 .clear_history:hover {
 	cursor: pointer;
 }
-
-/* .clear_history {
-	font-size: 2vmin;
-	bottom: 0;
-	left: 50%;
-	transform: translate(-50%);
-	position: absolute;
-} */
+.num_btn:hover,
+.op_btn:hover,
+.plus_minus:hover,
+#clearEntry_btn:hover,
+#clear_btn:hover {
+	cursor: pointer;
+	color: white;
+	background-color: rgba(0, 0, 0, .8) !important;
+	box-shadow: 1px -1px 3px black;
+}
+.num_btn,
+.op_btn,
+.plus_minus,
+#clearEntry_btn,
+#clear_btn {
+	height: 20%;
+	color: white;
+	background-color: rgba(0,0,0,.4);
+	font-size: 4vmin;
+	box-shadow: 1px -1px 3px black;
+}
+.col {
+	margin-bottom: 5px;
+}
+.row{
+	margin-bottom: 0;
+}

@@ -1,9 +1,12 @@
 class Model {
 	constructor () {
-		this.num1 = ['']; 
-		this.operator = [''];
+		this.num1 = ['0']; 
 		this.num2 = ['']; 
+		this.operator = [''];
 		this.result = [''];
+		this.lastnum2 = [''];
+		this.lastOperator =[''];
+		this.lastResult = [''];
 		this.currentInput = this.num1;
 	}
 	giveProps() {
@@ -16,41 +19,49 @@ class Model {
 		}
 	}
 	makeArgs(buttonPressed) {
-		console.log('button pressed', buttonPressed); //log button pressed
-		if (!isNaN(parseInt(buttonPressed))) { //verify button pressed is a number, not an operator
+		if (this.num1[0] === '0'){
+			this.num1[0] = '';
+		}
+		if (!isNaN(parseInt(buttonPressed))) { //verify pressed number
 			this.currentInput[0] += buttonPressed;
 		}
-		if (buttonPressed === '.' && this.currentInput[0].indexOf('.') === -1){ //check if no decimal is present
-			this.currentInput[0] += buttonPressed; //add decimal if true
+		if (buttonPressed === '.' && this.currentInput[0].indexOf('.') === -1){
+			this.currentInput[0] += buttonPressed;
 		} 
-		if (this.num1[0].length > 0 && ['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) {//check if button pressed was an operator
-			this.operator[0] = buttonPressed; //store operator pressed to the operator variable
-			this.currentInput = this.num2; //switch num we are putting numbers in
+		if (['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) { //verify operator btn press
+			this.operator[0] = buttonPressed;
+			this.currentInput = this.num2;
 		}
-		this.lastnum2 = this.num2;
-		this.lastOperator = this.operator;
 		return this.giveProps();
 	}
 	invertValue() {
-		let inverse = this.currentInput[0] * -1;
-		this.currentInput[0] = inverse.toString();
+		if (this.currentInput[0] !== ''){
+			let inverse = this.currentInput[0] * -1;
+			this.currentInput[0] = inverse.toString();
+			return this.giveProps();
+		}
 		return this.giveProps();
 	}
 	equals() {
-		if(this.num2[0].length===0){ //rollover operation, adds last result to last result if no inputs and an operator
-			this.num2 = this.lastnum2; //get last num2 and assign to current num2
-		} else if(!this.operator[0] && !this.num2[0]){//operation repeat, perform last operation on result and last num 2
-			this.operator = this.lastOperator; //get last operator used and assign to current operator
-			this.num2 = this.lastnum2; //get last num2 and assign to current num2
+		if (this.operator[0] && !this.num2[0]) { //rollover operation, repeat last operation on result
+			this.num1[0] = this.lastResult[0] || '0';
+			this.num2[0] = this.lastnum2[0]; 
 		}
-		this.doMath(this.num1, this.num2, this.operator);
+		if (!this.operator[0] && !this.num2[0]) { //operation repeat, perform last operation on result and lastNum2
+			this.num1[0] = this.lastResult[0] || '0';
+			this.operator[0] = this.lastOperator[0];
+			this.num2[0] = this.lastnum2[0];
+		}
+		if (!this.num1[0] && this.operator[0] && this.num2[0]) { //add to last result/subsequent operations
+			this.num1[0] = this.lastResult[0] || '0';
+		}
+		this.doMath(this.num1[0], this.num2[0], this.operator[0]);
 		return this.giveProps();
 	}
-	doMath(number1, number2, operator){
-		let num1 = parseFloat(number1); 
-		let num2 = parseFloat(number2);
-		let op = operator.toString();
-		switch(op){ //checks what operator was used, performs operation and stores result
+	doMath(num1, num2, op){ //
+		num1 = parseFloat(num1); 
+		num2 = parseFloat(num2);
+		switch(op){
 			case '+':
 				this.result[0] += num1 + num2
 				break;
@@ -64,6 +75,9 @@ class Model {
 				this.result[0] += num1 / num2
 				break;
 			};
+		this.lastResult = this.result;
+		this.lastnum2 = this.num2;
+		this.lastOperator = this.operator;
 	}
 	resetInputs() {
 		this.num1 = ['']; //number set to the left of the operator
@@ -73,18 +87,19 @@ class Model {
 		this.currentInput = this.num1;//set current input that can be changed, either adding to num1 or num2
 	}
 	clearEntry() {
-		if(this.currentInput[0].length===0){
+		if (this.currentInput[0] && this.currentInput === this.num2){
+			this.currentInput[0] = '';
 			this.currentInput = this.num1;
+			return this.giveProps();
 		}
 		this.currentInput[0] = '';
-		return this.giveProps();
+		return this.giveProps()
 	}
 }
 
 class View{
 	constructor(){
 		this.mainDisplay = $('#display');
-		this.smallDisplay = $('#small-display');
 		this.history = $('.history');
 	}
 	updateDisplay(num) {
@@ -94,11 +109,13 @@ class View{
 	}
 	updateHistory(num) {
 		const { num1, op, num2, result } = num;
-		if (num1[0].length > 0 && op[0].length > 0 && num2[0].length > 0 && result[0].length > 0) {
-			let h5 = $('<h5>');
-			h5.text(`${num1} ${op} ${num2} = ${result}`);
-			this.history.append(h5)
-			this.mainDisplay.text(result);
+		if (num1[0] && op[0] && num2[0] && result[0]) {
+			let p = $('<p>', {
+				class: 'history_item'
+			});
+			p.text(`${num1[0]} ${op[0]} ${num2[0]} = ${result[0]}`);
+			this.history.append(p)
+			this.mainDisplay.text(this.roundDisplayNum(result));
 		}
 	}
 	clearHistory() {
@@ -106,6 +123,9 @@ class View{
 	}
 	displayToZero(){
 		this.mainDisplay.text('0');
+	}
+	roundDisplayNum(num){
+		return Math.round(num * 2)/2;
 	}
 	displayToResult(num){
 		this.mainDisplay.text(num.result);
@@ -141,12 +161,12 @@ class Controller{
 			// this.display.displayToZero();
 		});
 		$('#clear_btn').on('click', () => {
-			this.calculator.resetInputs(); 
+			this.calculator = new Model;
 			this.display.displayToZero() ;
 		});
 		$('#clearEntry_btn').on('click', () => {
-			this.calculator.clearEntry();
-			this.display.displayToZero();
+			this.display.updateDisplay(
+				this.calculator.clearEntry());
 		});
 		$('.clear_history').on('click', () => {
 			this.display.clearHistory();
