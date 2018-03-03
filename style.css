@@ -1,19 +1,12 @@
-/* @font-face {
-	font-family: 'LCD';
-	src: url(fonts/DS-DIGI.ttf);
-} */
-
 ::-webkit-scrollbar {
-	display: none;}
-
+	display: none;
+}
 * {
 	box-sizing: border-box;
 }
-
 html {
 	margin: 0;
 }
-
 body {    
 	width: 100vw;
     height: 100vh;
@@ -22,17 +15,22 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
-
 .head {
 	font-size: 8vmin;
+	margin-bottom: 3% !important;
 }
-
+@media (orientation: landscape){
+	.head {
+		font-size: 8vmin;
+		margin-bottom: 5% !important;
+	}
+}
 .view {
 	font-size: 8vmin;
 	background-color: rgba(0,0,0,.8);
 	color: white;
 	text-align: right;
-	border-radius: 1vmin;
+	border-radius: 1%;
 }
 .log {
 	position: relative;
@@ -51,14 +49,30 @@ body {
 }
 .history {
 	overflow: auto;
-	margin-top: 18%;
-	height: 70%;
+	margin: 9% 0 !important;
+	height: 68%;
 	display: flex;
 	flex-direction: column-reverse;
 }
+@media (max-width:600px) {
+	.history {
+		overflow: auto;
+		margin: 5% 0 !important;
+		height: 75%;
+		display: flex;
+		font-size: 4vmin;
+		flex-direction: column-reverse;
+	}
+}
 .history_item {
 	margin: 0;
-	font-size: 3vmin;
+	font-size: 5vmin;
+}
+@media (min-width: 600px){
+	.history_item {
+		margin: 0;
+		font-size: 4vmin;
+	}
 }
 .clear_history {
 	position: absolute;
@@ -82,7 +96,6 @@ body {
 	background-color: rgba(0, 0, 0, 1) !important;
 	box-shadow: 1px -1px 3px black;
 }
-
 .ops,
 #clearEntry_btn,
 #clear_btn {
@@ -92,14 +105,12 @@ body {
 	font-size: 4vmin;
 	box-shadow: 1px -1px 3px black;
 }
-
 .op_btn {
 	height: 20%;
 	color: white;
 	font-size: 4vmin;
 	box-shadow: 1px -1px 3px black;
 }
-
 .nums {
 	height: 20%;
 	color: white;
