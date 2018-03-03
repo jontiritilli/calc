@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Calculator|Main</title>
+	<title>JS Calculator</title>
 	<meta charset="utf-8">
 	<meta author="Jonathan Tiritilli">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,12 +9,14 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw=" crossorigin="anonymous"></script>
 	<script src='main.js'></script>
+	<link rel="icon" href="./images/favicon.png">
+	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 			<div class="col s12 center-align">
-				<div class='head'>Super Fantastic Calculator</div>
+				<div class='head'>Javascript Calculator</div>
 			</div>
 		</div>
 		<header></header>
@@ -31,34 +33,34 @@
 					<div class='row'>
 						<button id='clear_btn' class='btn red darken-3 col s6 my-2'>Clear</button>
 						<button id='clearEntry_btn' class='btn amber darken-3 col s6 my-2'>CE</button>
-						<button class='num_btn col s4 btn'>7</button>
-						<button class='num_btn col s4 btn'>8</button>
-						<button class='num_btn col s4 btn'>9</button>
-						<button class='num_btn col s4 btn'>4</button>
-						<button class='num_btn col s4 btn'>5</button>
-						<button class='num_btn col s4 btn'>6</button>
-						<button class='num_btn col s4 btn'>1</button>
-						<button class='num_btn col s4 btn'>2</button>
-						<button class='num_btn col s4 btn'>3</button>
-						<button class='num_btn col s4 btn'>0</button>
-						<button class='num_btn col s4 btn'>.</button>
-						<button class='plus_minus btn col s4'>+/-</button>
+						<button class='num_btn nums col s4 btn'>7</button>
+						<button class='num_btn nums col s4 btn'>8</button>
+						<button class='num_btn nums col s4 btn'>9</button>
+						<button class='num_btn nums col s4 btn'>4</button>
+						<button class='num_btn nums col s4 btn'>5</button>
+						<button class='num_btn nums col s4 btn'>6</button>
+						<button class='num_btn nums col s4 btn'>1</button>
+						<button class='num_btn nums col s4 btn'>2</button>
+						<button class='num_btn nums col s4 btn'>3</button>
+						<button class='plus_minus ops btn col s4'>+/-</button>
+						<button class='num_btn nums col s4 btn'>0</button>
+						<button class='num_btn ops col s4 btn'>.</button>
 					</div>	
 				</div>
 				<div class='col s2'>
 					<div class='row'>
-						<button id='divide_btn' class='op_btn col s12 btn'>&divide;</button>
-						<button id='multiply_btn' class='op_btn col s12 btn'>x</button>
-						<button id='subtract_btn' class='op_btn col s12 btn'>-</button>
-						<button id='add_btn' class='op_btn col s12 btn'>+</button>
-						<button id='equal_btn' class='op_btn col s12 btn green darken-1'>=</button>
+						<button id='divide_btn' class='op_btn col s12 btn blue-grey darken-2'>&divide;</button>
+						<button id='multiply_btn' class='op_btn col s12 btn blue-grey darken-2'>x</button>
+						<button id='subtract_btn' class='op_btn col s12 btn blue-grey darken-2'>-</button>
+						<button id='add_btn' class='op_btn col s12 btn blue-grey darken-2'>+</button>
+						<button id='equal_btn' class='op_btn col s12 btn green darken-2'>=</button>
 					</div>
 				</div>
 				<div class='col s8 m3 offset-s2 history-card'>
 					<div class="row log">
-						<div class="col s12 history_header center-align">history:</div>
+						<div class="col s12 history_header left-align">History:</div>
 						<div class="col s12 history center-align"></div>
-						<div class="col s12 center-align clear_history">Clear</div>
+						<div class="col s4 m10 offset-s4 offset-m1 center-align clear_history">Clear</div>
 					</div>
 				</div>
 			</div>
