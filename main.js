@@ -38,16 +38,16 @@ class Model {
 		if (this.currentInput[0] !== ''){
 			let inverse = this.currentInput[0] * -1;
 			this.currentInput[0] = inverse.toString();
-			return this.giveProps();
+			// return this.giveProps();
 		}
 		return this.giveProps();
 	}
 	equals() {
-		if (this.operator[0] && !this.num2[0]) { //rollover operation, repeat last operation on result
-			this.num1[0] = this.lastResult[0] || '0';
-			this.num2[0] = this.lastnum2[0]; 
+		if (this.operator[0] && !this.num2[0]) { //set up rollover operation, repeat last operation on result
+			this.operator[0] = this.lastOperator[0];
+			this.num2[0] = this.lastResult[0]; 
 		}
-		if (!this.operator[0] && !this.num2[0]) { //operation repeat, perform last operation on result and lastNum2
+		if (!this.operator[0] && !this.num2[0]) { //set up operation repeat, perform last operation on result and lastNum2
 			this.num1[0] = this.lastResult[0] || '0';
 			this.operator[0] = this.lastOperator[0];
 			this.num2[0] = this.lastnum2[0];
@@ -80,11 +80,11 @@ class Model {
 		this.lastOperator = this.operator;
 	}
 	resetInputs() {
-		this.num1 = ['']; //number set to the left of the operator
+		this.num1 = [''];
 		this.operator = [''];
-		this.num2 = ['']; //number set to the right of the operator
+		this.num2 = [''];
 		this.result = [''];
-		this.currentInput = this.num1;//set current input that can be changed, either adding to num1 or num2
+		this.currentInput = this.num1;
 	}
 	clearEntry() {
 		if (this.currentInput[0] && this.currentInput === this.num2){
@@ -115,17 +115,18 @@ class View{
 			});
 			p.text(`${num1[0]} ${op[0]} ${num2[0]} = ${result[0]}`);
 			this.history.append(p)
-			this.mainDisplay.text(this.roundDisplayNum(result));
+			this.mainDisplay.text(result);
 		}
 	}
 	clearHistory() {
 		$('.history').empty();
 	}
-	displayToZero(){
+	displayToZero() {
+
 		this.mainDisplay.text('0');
 	}
 	roundDisplayNum(num){
-		return Math.round(num * 2)/2;
+		return Math.round(num * 2) / 2;
 	}
 	displayToResult(num){
 		this.mainDisplay.text(num.result);
