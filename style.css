@@ -1,7 +1,7 @@
-@font-face {
+/* @font-face {
 	font-family: 'LCD';
 	src: url(fonts/DS-DIGI.ttf);
-}
+} */
 
 ::-webkit-scrollbar {
 	display: none;}
@@ -17,7 +17,7 @@ html {
 body {    
 	width: 100vw;
     height: 100vh;
-    font-family: 'LCD';
+    font-family: 'Kanit', sans-serif;
     background-image: url(images/math.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -25,13 +25,12 @@ body {
 
 .head {
 	font-size: 8vmin;
-	color: #F6E006FF;
 }
 
 .view {
 	font-size: 8vmin;
 	background-color: rgba(0,0,0,.8);
-	color: #F6E006FF;
+	color: white;
 	text-align: right;
 	border-radius: 1vmin;
 }
@@ -43,8 +42,7 @@ body {
 	height: 32vh;
 	font-size: 3vmin;
 	background-color: rgba(0, 0, 0, .8);
-	color: #F6E006FF;
-	border-radius: 2%;
+	color: white;
 }
 .history_header {
 	position: absolute;
@@ -53,8 +51,10 @@ body {
 }
 .history {
 	overflow: auto;
-	margin-top: 15%;
+	margin-top: 18%;
 	height: 70%;
+	display: flex;
+	flex-direction: column-reverse;
 }
 .history_item {
 	margin: 0;
@@ -65,9 +65,12 @@ body {
 	bottom: 0;
 	background-color: rgba(0, 0, 0, .8) !important;
 	margin-bottom: 20px;
+	box-shadow: 1px -1px 3px black;
 }
 .clear_history:hover {
 	cursor: pointer;
+	background-color: rgba(0, 0, 0, 1) !important;
+	color: yellow;
 }
 .num_btn:hover,
 .op_btn:hover,
@@ -76,17 +79,31 @@ body {
 #clear_btn:hover {
 	cursor: pointer;
 	color: white;
-	background-color: rgba(0, 0, 0, .8) !important;
+	background-color: rgba(0, 0, 0, 1) !important;
 	box-shadow: 1px -1px 3px black;
 }
-.num_btn,
-.op_btn,
-.plus_minus,
+
+.ops,
 #clearEntry_btn,
 #clear_btn {
 	height: 20%;
 	color: white;
-	background-color: rgba(0,0,0,.4);
+	background-color: rgba(0,0,0,.5);
+	font-size: 4vmin;
+	box-shadow: 1px -1px 3px black;
+}
+
+.op_btn {
+	height: 20%;
+	color: white;
+	font-size: 4vmin;
+	box-shadow: 1px -1px 3px black;
+}
+
+.nums {
+	height: 20%;
+	color: white;
+	background-color: rgba(0, 0, 0, .8);
 	font-size: 4vmin;
 	box-shadow: 1px -1px 3px black;
 }

@@ -44,7 +44,6 @@ class Model {
 	}
 	equals() {
 		if (this.operator[0] && !this.num2[0]) { //set up rollover operation, repeat last operation on result
-			this.operator[0] = this.lastOperator[0];
 			this.num2[0] = this.lastResult[0]; 
 		}
 		if (!this.operator[0] && !this.num2[0]) { //set up operation repeat, perform last operation on result and lastNum2
@@ -116,7 +115,12 @@ class View{
 			p.text(`${num1[0]} ${op[0]} ${num2[0]} = ${result[0]}`);
 			this.history.append(p)
 			this.mainDisplay.text(result);
+			this.historyScrollTop();
 		}
+	}
+	historyScrollTop(){
+		let element = $('.history');
+		element.animate({scrollTop:0}, 'slow')
 	}
 	clearHistory() {
 		$('.history').empty();
