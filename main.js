@@ -99,31 +99,37 @@ class Model {
 class View{
 	constructor(){
 		this.mainDisplay = $('#display');
-		this.history = $('.history');
+		this.historyDOM = $('.history');
+		this.historyArray = new Array
 	}
 	updateDisplay(num) {
-		if(num.current[0].length>0){
+		if(num.current[0]){
 			this.mainDisplay.text(num.current);
 		}
 	}
-	updateHistory(num) {
+	addToHistory(num) {
 		const { num1, op, num2, result } = num;
 		if (num1[0] && op[0] && num2[0] && result[0]) {
+			this.historyArray.push(`${num1} ${op} ${num2} = ${result}`);	
+		}
+	}
+	printHistory(historyArr){
+		for(let histInd = 0; histInd < historyArr.length; histInd++){
 			let p = $('<p>', {
 				class: 'history_item'
 			});
-			p.text(`${num1[0]} ${op[0]} ${num2[0]} = ${result[0]}`);
-			this.history.append(p)
-			this.mainDisplay.text(result);
-			this.historyScrollTop();
+			p.text(historyArr[histInd]);
+			this.historyDOM.append(p);
 		}
 	}
 	historyScrollTop(){
-		let element = $('.history');
-		element.animate({scrollTop:0}, 'slow')
+		this.historyDOM.animate({scrollTop: 0}, 'slow')
 	}
-	clearHistory() {
-		$('.history').empty();
+	clearHistory(clearArr) {
+		if(clearArr){
+			this.historyArray = new Array;
+		}
+		this.historyDOM.empty();
 	}
 	displayToZero() {
 
@@ -133,7 +139,13 @@ class View{
 		return Math.round(num * 2) / 2;
 	}
 	displayToResult(num){
-		this.mainDisplay.text(num.result);
+		if(num.result[0]){
+			this.mainDisplay.text(num.result[0]);
+			this.addToHistory(num);
+			this.clearHistory(false);
+			this.printHistory(this.historyArray);
+			this.historyScrollTop();
+		}
 	}
 }
 
@@ -159,7 +171,7 @@ class Controller{
 			)
 		});
 		$('#equal_btn').on('click', () => {
-			this.display.updateHistory(
+			this.display.displayToResult(
 				this.calculator.equals()
 			);
 			this.calculator.resetInputs();
@@ -174,7 +186,7 @@ class Controller{
 				this.calculator.clearEntry());
 		});
 		$('.clear_history').on('click', () => {
-			this.display.clearHistory();
+			this.display.clearHistory(true);
 		});
 	}
 }
