@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS Calculator</title>
+	<meta charset="utf-8">
+	<meta author="Jonathan Tiritilli">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw=" crossorigin="anonymous"></script>
+	<script src='main.js'></script>
+	<link rel="icon" href="./images/favicon.png">
+	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+</head>
+<body>
+	<div class="row">
+		<div class="col s12 center-align">
+			<div class='head'>Javascript Calculator</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class='view col s12 m10 l6 offset-m1 offset-l3'>
+			<div class="row">
+				<div id='display' class='col s12'>0</div>
+			</div>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col s12 m7 l4 offset-m1 offset-l3'>
+			<div class='row'>
+				<div class="col s12">
+					<div class="row">
+						<button id='clear_btn' class='btn red darken-3 col s4'>Clear</button>
+						<button id='clearEntry_btn' class='btn amber darken-3 col s4'>CE</button>
+						<button id='divide_btn' class='op_btn col s3 offset-s1 btn'>&divide;</button>
+					</div>
+					<div class="row">
+						<button class='num_btn nums col s3 btn'>7</button>
+						<button class='num_btn nums col s3 btn'>8</button>
+						<button class='num_btn nums col s3 btn'>9</button>
+						<button id='multiply_btn' class='op_btn col s3 btn'>x</button>
+					</div>
+					<div class="row">
+						<button class='num_btn nums col s3 btn'>4</button>
+						<button class='num_btn nums col s3 btn'>5</button>
+						<button class='num_btn nums col s3 btn'>6</button>
+						<button id='subtract_btn' class='op_btn col s3 btn'>-</button>
+					</div>
+					<div class="row">
+						<button class='num_btn nums col s3 btn'>1</button>
+						<button class='num_btn nums col s3 btn'>2</button>
+						<button class='num_btn nums col s3 btn'>3</button>
+						<button id='add_btn' class='op_btn col s3 btn'>+</button>
+					</div>
+					<div class="row">
+						<button class='plus_minus ops btn col s3'>+/-</button>
+						<button class='num_btn nums col s3 btn'>0</button>
+						<button class='num_btn ops col s3 btn'>.</button>
+						<button id='equal_btn' class='op_btn col s3 btn'>=</button>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<div class='col s12 m3 l2 history-card'>
+			<div class="row log">
+				<div class="col s12 history_header left-align">History:</div>
+				<div class="col s12 history center-align"></div>
+				<div class="col s4 m10 offset-s4 offset-m1 center-align clear_history">Clear</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
