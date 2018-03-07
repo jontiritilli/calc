@@ -5,12 +5,12 @@
 
 >Created with the following technologies:
 
--- Javascript ES6
+- Javascript ES6
 
--- jQuery
+- jQuery
 
--- MaterializeCSS
+- MaterializeCSS
 
--- HTML5
+- HTML5
 
--- CSS3
+- CSS3
