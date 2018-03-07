@@ -108,7 +108,10 @@ class View{
 		}
 	}
 	addToHistory(num) {
-		const { num1, op, num2, result } = num;
+		let { num1, op, num2, result } = num;
+		num1[0] = this.roundDisplayNum(num1[0]);
+		num2[0] = this.roundDisplayNum(num2[0]);
+		result[0] = this.roundDisplayNum(result[0]);
 		if (num1[0] && op[0] && num2[0] && result[0]) {
 			this.historyArray.push(`${num1} ${op} ${num2} = ${result}`);	
 		}
@@ -132,15 +135,18 @@ class View{
 		this.historyDOM.empty();
 	}
 	displayToZero() {
-
 		this.mainDisplay.text('0');
 	}
 	roundDisplayNum(num){
-		return Math.round(num * 2) / 2;
+		if(num.length>8){
+			num=parseFloat(num)
+			return num.toExponential(3);
+		}
+		return num
 	}
 	displayToResult(num){
 		if(num.result[0]){
-			this.mainDisplay.text(num.result[0]);
+			this.mainDisplay.text(this.roundDisplayNum(num.result[0]));
 			this.addToHistory(num);
 			this.clearHistory(false);
 			this.printHistory(this.historyArray);
