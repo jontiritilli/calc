@@ -109,9 +109,9 @@ class View{
 	}
 	addToHistory(num) {
 		let { num1, op, num2, result } = num;
-		num1[0] = this.roundDisplayNum(num1[0]);
-		num2[0] = this.roundDisplayNum(num2[0]);
-		result[0] = this.roundDisplayNum(result[0]);
+		num1[0] = this.roundHistoryNum(num1[0]);
+		num2[0] = this.roundHistoryNum(num2[0]);
+		result[0] = this.roundHistoryNum(result[0]);
 		if (num1[0] && op[0] && num2[0] && result[0]) {
 			this.historyArray.push(`${num1} ${op} ${num2} = ${result}`);	
 		}
@@ -137,14 +137,21 @@ class View{
 	displayToZero() {
 		this.mainDisplay.text('0');
 	}
-	roundDisplayNum(num){
-		if(num.length>8){
-			num=parseFloat(num)
+	roundHistoryNum(num) {
+		if (num.length > 8) {
+			num = parseFloat(num)
 			return num.toExponential(3);
 		}
 		return num
 	}
-	displayToResult(num){
+	roundDisplayNum(num){
+		if(num.length>15){
+			num = parseFloat(num)
+			return num.toExponential(3);
+		}
+		return num
+	}
+	displayResult(num){
 		if(num.result[0]){
 			this.mainDisplay.text(this.roundDisplayNum(num.result[0]));
 			this.addToHistory(num);
@@ -177,7 +184,7 @@ class Controller{
 			)
 		});
 		$('#equal_btn').on('click', () => {
-			this.display.displayToResult(
+			this.display.displayResult(
 				this.calculator.equals()
 			);
 			this.calculator.resetInputs();
