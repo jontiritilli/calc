@@ -168,12 +168,12 @@ class Controller{
 		this.display = new View;
 	}
 	addClickHandlers() {
-		$('.num_btn').on('click', () => { 
+		$('.num_btn').on('click', (event) => { 
 			this.display.updateDisplay(
 				this.calculator.makeArgs($(event.target).text())
 			) 
 		});
-		$('.op_btn').on('click', () => {
+		$('.op_btn').on('click', (event) => {
 			this.display.updateDisplay(
 				this.calculator.makeArgs($(event.target).text())
 			) 
