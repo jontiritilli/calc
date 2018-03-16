@@ -28,7 +28,8 @@ class Model {
 		if (buttonPressed === '.' && this.currentInput[0].indexOf('.') === -1){
 			this.currentInput[0] += buttonPressed;
 		} 
-		if (['+', '÷', '-', 'x'].indexOf(buttonPressed) > -1) { //verify operator btn press
+		if (['+', '÷', '-', '×'].indexOf(buttonPressed) > -1) { //verify operator btn press
+			console.log(buttonPressed)
 			this.operator[0] = buttonPressed;
 			this.currentInput = this.num2;
 		}
@@ -44,7 +45,7 @@ class Model {
 	}
 	equals() {
 		if (this.operator[0] && !this.num2[0]) { //set up rollover operation, repeat last operation on result
-			this.num2[0] = this.lastResult[0]; 
+			this.num2[0] = this.lastResult[0] || this.num1[0]; 
 		}
 		if (!this.operator[0] && !this.num2[0]) { //set up operation repeat, perform last operation on result and lastNum2
 			this.num1[0] = this.lastResult[0] || '0';
@@ -67,7 +68,7 @@ class Model {
 			case '-':
 				this.result[0] += num1 - num2
 				break;
-			case 'x':
+			case '×':
 				this.result[0] += num1 * num2
 				break;
 			case '÷':
@@ -126,7 +127,7 @@ class View{
 		}
 	}
 	historyScrollTop(){
-		this.historyDOM.animate({scrollTop: 0}, 'slow')
+		this.historyDOM.animate({scrollTop: 0})
 	}
 	clearHistory(clearArr) {
 		if(clearArr){
@@ -140,14 +141,14 @@ class View{
 	roundHistoryNum(num) {
 		if (num.length > 8) {
 			num = parseFloat(num)
-			return num.toExponential(3);
+			return String(Number(num).toPrecision(15));
 		}
 		return num
 	}
 	roundDisplayNum(num){
 		if(num.length>15){
 			num = parseFloat(num)
-			return num.toExponential(3);
+			return String(Number(num).toPrecision(15));
 		}
 		return num
 	}
