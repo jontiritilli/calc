@@ -34,21 +34,19 @@ body {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	height: 33vh;
+	height: 205px;
 	font-size: 3vmin;
 	background-color: rgba(0, 0, 0, .8);
 	color: white;
 	border-radius: 2vmin;
 }
 .history_header {
-	position: absolute;
 	font-size: 3vmin;
 	text-decoration: underline;
 }
 
 .history {
 	overflow: auto;
-	margin: 12% 0 !important;
 	height: 68%;
 	display: flex;
 	flex-direction: column-reverse;
@@ -56,7 +54,6 @@ body {
 @media (max-width:600px) {
 	.history {
 		overflow: auto;
-		margin: 5% 0 !important;
 		height: 75%;
 		display: flex;
 		font-size: 4vmin;
@@ -74,7 +71,6 @@ body {
 	}
 }
 .clear_history {
-	position: absolute;
 	bottom: 0;
 	background-color: rgba(0, 0, 0, .8) !important;
 	margin-bottom: 20px;
@@ -122,6 +118,9 @@ body {
 .col {
 	margin-bottom: 5px;
 }
-.row{
+.row {
 	margin-bottom: 0;
+}
+.row.view {
+	margin-bottom: 2%;
 }
