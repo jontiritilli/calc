@@ -7,44 +7,37 @@
 html {
 	margin: 0;
 }
-body {    
+body {
 	width: 100vw;
-    height: 100vh;
+	height: 100vh;
+	background-color: rgb(46, 46, 46);
     font-family: 'Kanit', sans-serif;
 }
+.clear_history {
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .8) !important;
+	margin-bottom: 20px;
+	box-shadow: 1px -1px 3px black;
+}
+.clear_history:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 1) !important;
+	color: yellow;
+}
+.col {
+	margin-bottom: 5px;
+}
 .head {
-	font-size: 8vmin;
+	font-size: 3rem;
+	color: white;
 	margin-bottom: 3% !important;
 }
 @media (orientation: landscape){
 	.head {
-		font-size: 8vmin;
+		font-size: 4rem;
 		margin-bottom: 5% !important;
 	}
 }
-.view {
-	font-size: 8vmin;
-	background-color: rgba(0,0,0,.8);
-	color: white;
-	text-align: right;
-	border-radius: 2vmin;
-}
-.log {
-	position: relative;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	height: 205px;
-	font-size: 3vmin;
-	background-color: rgba(0, 0, 0, .8);
-	color: white;
-	border-radius: 2vmin;
-}
-.history_header {
-	font-size: 3vmin;
-	text-decoration: underline;
-}
-
 .history {
 	overflow: auto;
 	height: 68%;
@@ -70,17 +63,24 @@ body {
 		font-size: 2vmin;
 	}
 }
-.clear_history {
-	bottom: 0;
-	background-color: rgba(0, 0, 0, .8) !important;
-	margin-bottom: 20px;
-	box-shadow: 1px -1px 3px black;
-	border-radius: 1vmin;
+.history_header {
+	font-size: 1.5rem;
+	text-decoration: underline;
 }
-.clear_history:hover {
-	cursor: pointer;
-	background-color: rgba(0, 0, 0, 1) !important;
-	color: yellow;
+.log {
+	position: relative;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	height: 205px;
+	font-size: 3vmin;
+	background-color: rgba(0, 0, 0, .8);
+	color: white;
+}
+.main {
+	background-color: rgba(255, 140, 0, 0.658);
+	max-width: 450px;
+	margin: auto;
 }
 .num_btn:hover,
 .op_btn:hover,
@@ -98,29 +98,33 @@ body {
 	height: 20%;
 	color: white;
 	background-color: rgba(0,0,0,.7);
-	font-size: 4vmin;
+	font-size: 1.5rem;
 	box-shadow: 1px -1px 3px black;
 }
 .op_btn {
 	height: 20%;
 	color: white;
 	background-color: rgba(0, 0, 0, .7);
-	font-size: 4vmin;
+	font-size: 1.6rem;
 	box-shadow: 1px -1px 3px black;
 }
 .nums {
 	height: 20%;
 	color: white;
 	background-color: rgba(0, 0, 0, .8);
-	font-size: 4vmin;
+	font-size: 1.6rem;
 	box-shadow: 1px -1px 3px black;
-}
-.col {
-	margin-bottom: 5px;
 }
 .row {
 	margin-bottom: 0;
 }
 .row.view {
 	margin-bottom: 2%;
+}
+.view {
+	font-size: 3rem;
+	margin-top: 5px;
+	background-color: rgba(0,0,0,.8);
+	color: white;
+	text-align: right;
 }
