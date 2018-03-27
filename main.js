@@ -1,7 +1,7 @@
 class Model {
 	constructor () {
-		this.num1 = ['0']; 
-		this.num2 = ['']; 
+		this.num1 = ['0'];
+		this.num2 = [''];
 		this.operator = [''];
 		this.result = [''];
 		this.lastnum2 = [''];
@@ -27,7 +27,7 @@ class Model {
 		}
 		if (buttonPressed === '.' && this.currentInput[0].indexOf('.') === -1){
 			this.currentInput[0] += buttonPressed;
-		} 
+		}
 		if (['+', '÷', '-', '×'].indexOf(buttonPressed) > -1) { //verify operator btn press
 			console.log(buttonPressed)
 			this.operator[0] = buttonPressed;
@@ -45,7 +45,7 @@ class Model {
 	}
 	equals() {
 		if (this.operator[0] && !this.num2[0]) { //set up rollover operation, repeat last operation on result
-			this.num2[0] = this.lastResult[0] || this.num1[0]; 
+			this.num2[0] = this.lastResult[0] || this.num1[0];
 		}
 		if (!this.operator[0] && !this.num2[0]) { //set up operation repeat, perform last operation on result and lastNum2
 			this.num1[0] = this.lastResult[0] || '0';
@@ -59,7 +59,7 @@ class Model {
 		return this.giveProps();
 	}
 	doMath(num1, num2, op){ //
-		num1 = parseFloat(num1); 
+		num1 = parseFloat(num1);
 		num2 = parseFloat(num2);
 		switch(op){
 			case '+':
@@ -114,7 +114,7 @@ class View{
 		num2[0] = this.roundHistoryNum(num2[0]);
 		result[0] = this.roundHistoryNum(result[0]);
 		if (num1[0] && op[0] && num2[0] && result[0]) {
-			this.historyArray.push(`${num1} ${op} ${num2} = ${result}`);	
+			this.historyArray.push(`${num1} ${op} ${num2} = ${result}`);
 		}
 	}
 	printHistory(historyArr){
@@ -141,14 +141,14 @@ class View{
 	roundHistoryNum(num) {
 		if (num.length > 8) {
 			num = parseFloat(num)
-			return String(Number(num).toPrecision(15));
+			return String(Number(num).toPrecision(10));
 		}
 		return num
 	}
 	roundDisplayNum(num){
-		if(num.length>15){
+		if(num.length>10){
 			num = parseFloat(num)
-			return String(Number(num).toPrecision(15));
+			return String(Number(num).toPrecision(10));
 		}
 		return num
 	}
@@ -169,15 +169,15 @@ class Controller{
 		this.display = new View;
 	}
 	addClickHandlers() {
-		$('.num_btn').on('click', (event) => { 
+		$('.num_btn').on('click', (event) => {
 			this.display.updateDisplay(
 				this.calculator.makeArgs($(event.target).text())
-			) 
+			)
 		});
 		$('.op_btn').on('click', (event) => {
 			this.display.updateDisplay(
 				this.calculator.makeArgs($(event.target).text())
-			) 
+			)
 		});
 		$('.plus_minus').on('click', () => {
 			this.display.updateDisplay(
