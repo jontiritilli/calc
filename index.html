@@ -10,12 +10,15 @@
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js" integrity="sha256-8WqyJLuWKRBVhxXIL1jBDD7SDxU936oZkCnxQbWwJVw=" crossorigin="anonymous"></script>
 	<script src='main.js'></script>
 	<link rel="icon" href="./images/favicon.png">
-	<link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
-</head>
+	<link href="https://fonts.googleapis.com/css?family=Arvo:700i|Inconsolata" rel="stylesheet"></head>
 <body>
 	<div class="row">
-		<div class="col s12 center-align">
-			<div class='head'>Javascript Calculator</div>
+		<div class="col s12 m10 offset-m1 center-align">
+			<div class="card">
+				<div class="card-content">
+					<div class='head'>Javascript Calculator</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -29,7 +32,7 @@
 					</div>
 				</div>
 				<div class='row'>
-					<div class='col s12 m8'>
+					<div class='col s12 m7 num-card'>
 						<div class="row">
 							<button id='clear_btn' class='btn red darken-4 col s4'>C</button>
 							<button id='clearEntry_btn' class='btn col s4'>CE</button>
@@ -60,9 +63,13 @@
 							<button id='equal_btn' class='op_btn col s3 btn'>=</button>
 						</div>
 					</div>
-					<div class='col s12 m4 history-card'>
+					<div class='col s12 m5 history-card'>
 						<div class="row log">
-							<div class="col s12 history_header left-align">History:</div>
+							<div class="col s12 history_header left-align">
+								<div class='history-title'>
+									History:
+								</div>
+							</div>
 							<div class="col s12 history center-align"></div>
 							<div class="col s4 m10 offset-s4 offset-m1 center-align clear_history">Clear</div>
 						</div>
