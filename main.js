@@ -8,6 +8,7 @@ class Model {
 		this.lastOperator =[''];
 		this.lastResult = [''];
 		this.currentInput = this.num1;
+		this.error = [''];
 	}
 	giveProps() {
 		return {
@@ -15,7 +16,8 @@ class Model {
 			current: this.currentInput,
 			num1: this.num1,
 			num2: this.num2,
-			op: this.operator
+			op: this.operator,
+			error: this.error
 		}
 	}
 	makeArgs(buttonPressed) {
@@ -28,7 +30,7 @@ class Model {
 		if (buttonPressed === '.' && this.currentInput[0].indexOf('.') === -1){
 			this.currentInput[0] += buttonPressed;
 		}
-		if (['+', '÷', '-', '×'].indexOf(buttonPressed) > -1) { //verify operator btn press
+		if (['+', '÷', '/', '-', '×', 'x'].indexOf(buttonPressed) > -1) { //verify operator btn press
 			this.operator[0] = buttonPressed;
 			this.currentInput = this.num2;
 		}
@@ -53,6 +55,10 @@ class Model {
 		if (!this.num1[0] && this.operator[0] && this.num2[0]) { //add to last result/subsequent operations
 			this.num1[0] = this.lastResult[0] || '0';
 		}
+		if(['÷', '/'].indexOf(this.operator[0]) > -1 && this.num2[0] === '0'){
+			this.error[0] = 'cannot divide by zero';
+			return this.giveProps();
+		}
 		this.doMath(this.num1[0], this.num2[0], this.operator[0]);
 		return this.giveProps();
 	}
@@ -69,7 +75,13 @@ class Model {
 			case '×':
 				this.result[0] += num1 * num2
 				break;
+			case 'x':
+				this.result[0] += num1 * num2
+				break;
 			case '÷':
+				this.result[0] += num1 / num2
+				break;
+			case '/':
 				this.result[0] += num1 / num2
 				break;
 			};
@@ -83,6 +95,7 @@ class Model {
 		this.num2 = [''];
 		this.result = [''];
 		this.currentInput = this.num1;
+		this.error = [''];
 		return this.giveProps();
 	}
 	clearEntry() {
@@ -152,8 +165,8 @@ class View {
 		return num
 	}
 	displayResult(num){
-		if(isNaN(num)){
-			this.mainDisplay.text(this.roundDisplayNum('Error'))
+		if(num.error[0]){
+			return this.mainDisplay.text(num.error)
 		}
 		if(num.result[0]){
 			this.mainDisplay.text(this.roundDisplayNum(num.result[0]));
@@ -171,6 +184,12 @@ class Controller {
 		this.display = new View;
 	}
 	handleKeyPress(e) {
+		if(e.which==13){
+			this.display.displayResult(
+				this.calculator.equals()
+			);
+			return this.calculator.resetInputs();
+		}
 		if(e.which==13){
 			this.display.displayResult(
 				this.calculator.equals()
