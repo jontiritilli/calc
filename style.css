@@ -123,6 +123,9 @@ body {
 	border-radius: 2px !important;
 	height: 60px !important;
 }
+.btn:focus {
+	background-color: white !important;
+}
 .clear_history {
 	background-color: #DBFCFF;
 	color: black;
@@ -130,6 +133,9 @@ body {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 	font-size: 1.6rem;
 	margin-bottom: 20px;
+}
+.clear_history:focus {
+	background-color: #DBFCFF !important;
 }
 #divide_btn,
 #clearEntry_btn,
@@ -140,20 +146,36 @@ body {
 #clear_btn {
 	font-size: 1.5rem;
 }
-#clearEntry_btn{
+#clear_btn {
+	background-color: #B71C1C;
+}
+#clear_btn:focus {
+	background-color: #B71C1C !important;
+}
+#clearEntry_btn {
 	color: black;
 	background-color: #5DD9C1;
+}
+#clearEntry_btn:focus {
+	background-color: #5DD9C1 !important;
 }
 .op_btn {
 	background-color: #621b73;
 	font-size: 1.6rem;
 	margin-left: 5px;
 }
+.op_btn:focus {
+	background-color: #621b73 !important;
+}
 .nums,
 .ops {
 	background-color: #DBFCFF;
 	color: black;
 	font-size: 1.6rem;
+}
+.nums:focus,
+.ops:focus {
+	background-color: #DBFCFF !important;
 }
 .num_btn:hover,
 .op_btn:hover,
