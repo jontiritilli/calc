@@ -29,7 +29,6 @@ class Model {
 			this.currentInput[0] += buttonPressed;
 		}
 		if (['+', '÷', '-', '×'].indexOf(buttonPressed) > -1) { //verify operator btn press
-			console.log(buttonPressed)
 			this.operator[0] = buttonPressed;
 			this.currentInput = this.num2;
 		}
@@ -39,7 +38,6 @@ class Model {
 		if (this.currentInput[0] !== ''){
 			let inverse = this.currentInput[0] * -1;
 			this.currentInput[0] = inverse.toString();
-			// return this.giveProps();
 		}
 		return this.giveProps();
 	}
@@ -80,11 +78,12 @@ class Model {
 		this.lastOperator = this.operator;
 	}
 	resetInputs() {
-		this.num1 = [''];
+		this.num1 = ['0'];
 		this.operator = [''];
 		this.num2 = [''];
 		this.result = [''];
 		this.currentInput = this.num1;
+		return this.giveProps();
 	}
 	clearEntry() {
 		if (this.currentInput[0] && this.currentInput === this.num2){
@@ -92,12 +91,12 @@ class Model {
 			this.currentInput = this.num1;
 			return this.giveProps();
 		}
-		this.currentInput[0] = '';
+		this.currentInput[0] = '0';
 		return this.giveProps()
 	}
 }
 
-class View{
+class View {
 	constructor(){
 		this.mainDisplay = $('#display');
 		this.historyDOM = $('.history');
@@ -122,12 +121,15 @@ class View{
 			let p = $('<p>', {
 				class: 'history_item'
 			});
+			let span = $('<span>', {
+				class: 'history_divider'
+			});
 			p.text(historyArr[histInd]);
-			this.historyDOM.append(p);
+			this.historyDOM.append(span, p);
 		}
 	}
 	historyScrollTop(){
-		this.historyDOM.animate({scrollTop: 0})
+		this.historyDOM.animate({scrollTop: 0}, {duration: 10})
 	}
 	clearHistory(clearArr) {
 		if(clearArr){
@@ -135,24 +137,24 @@ class View{
 		}
 		this.historyDOM.empty();
 	}
-	displayToZero() {
-		this.mainDisplay.text('0');
-	}
 	roundHistoryNum(num) {
 		if (num.length > 8) {
 			num = parseFloat(num)
-			return String(Number(num).toPrecision(10));
+			return String(Number(num.toPrecision(10)));
 		}
 		return num
 	}
 	roundDisplayNum(num){
 		if(num.length>10){
 			num = parseFloat(num)
-			return String(Number(num).toPrecision(10));
+			return String(Number(num.toPrecision(10)));
 		}
 		return num
 	}
 	displayResult(num){
+		if(isNaN(num)){
+			this.mainDisplay.text(this.roundDisplayNum('Error'))
+		}
 		if(num.result[0]){
 			this.mainDisplay.text(this.roundDisplayNum(num.result[0]));
 			this.addToHistory(num);
@@ -163,10 +165,22 @@ class View{
 	}
 }
 
-class Controller{
+class Controller {
 	constructor() {
 		this.calculator = new Model;
 		this.display = new View;
+	}
+	handleKeyPress(e) {
+		if(e.which==13){
+			this.display.displayResult(
+				this.calculator.equals()
+			);
+			return this.calculator.resetInputs();
+		}
+		this.display.updateDisplay(
+			this.calculator.makeArgs(String.fromCharCode(e.which))
+		)
+		return
 	}
 	addClickHandlers() {
 		$('.num_btn').on('click', (event) => {
@@ -189,11 +203,12 @@ class Controller{
 				this.calculator.equals()
 			);
 			this.calculator.resetInputs();
-			// this.display.displayToZero();
 		});
 		$('#clear_btn').on('click', () => {
 			this.calculator = new Model;
-			this.display.displayToZero() ;
+			this.display.updateDisplay(
+				this.calculator.resetInputs()
+			);
 		});
 		$('#clearEntry_btn').on('click', () => {
 			this.display.updateDisplay(
@@ -208,5 +223,7 @@ class Controller{
 $(document).ready(() => {
 	let input = new Controller;
 	input.addClickHandlers();
-}
-)
+	document.onkeypress = (e) => {
+		input.handleKeyPress(e);
+	}
+})
