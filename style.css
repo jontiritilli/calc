@@ -43,14 +43,14 @@ body {
 /* Calculator Styles */
 .main {
 	background-color: #320E3B;
-    border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+	border-radius: 2px;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 	margin: auto;
 	max-width: 480px;
-    -webkit-transition: -webkit-box-shadow .25s;
-    transition: -webkit-box-shadow .25s;
-    transition: box-shadow .25s;
-    transition: box-shadow .25s, -webkit-box-shadow .25s;
+	-webkit-transition: -webkit-box-shadow .25s;
+	transition: -webkit-box-shadow .25s;
+	transition: box-shadow .25s;
+	transition: box-shadow .25s, -webkit-box-shadow .25s;
 }
 @media (min-width: 600px) {
 	.row .col .num-card {
@@ -60,9 +60,9 @@ body {
 .view {
 	background-color: #6DAEDB;
 	border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 	color: white;
-	font-size: 3rem;
+	font-size: 33px;
 	margin-top: 5px;
 	text-align: right;
 }
@@ -70,7 +70,7 @@ body {
 .log {
 	background-color: #6DAEDB;
 	border-radius: 2px;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 	color: white;
 	display: flex;
 	flex: 1;
@@ -85,19 +85,28 @@ body {
 	}
 }
 .history-title {
-    background-color: #320E3B;
+	background-color: #320E3B;
 	border-radius: 2px;
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-    margin-top: 2px;
-    width: 96px;
+	margin-top: 2px;
+	width: 96px;
 	font-size: 1.5rem;
+}
+.history-title>span {
+	margin-left: 2px;
+}
+.history_divider {
+	max-width: 500px;
+	background-color: #621b73;
+	min-height: 1px;
+	margin: 1px 0 2px 0;
 }
 .history {
 	display: flex;
 	flex-direction: column-reverse;
 	height: 240px;
 	overflow: auto;
-    word-wrap: break-word;
+	word-wrap: break-word;
 }
 @media (max-width:600px) {
 	.history {
@@ -130,9 +139,8 @@ body {
 	background-color: #DBFCFF;
 	color: black;
 	bottom: 0;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 	font-size: 1.6rem;
-	margin-bottom: 20px;
 }
 .clear_history:focus {
 	background-color: #DBFCFF !important;
@@ -140,7 +148,7 @@ body {
 #divide_btn,
 #clearEntry_btn,
 #clear_btn {
-    margin-left: 2.777777778%;
+	margin-left: 2.777777778%;
 }
 #clearEntry_btn,
 #clear_btn {
