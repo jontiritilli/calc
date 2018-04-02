@@ -47,7 +47,7 @@ class Model {
 		if (this.operator[0] && !this.num2[0]) { //set up rollover operation, repeat last operation on result
 			this.num2[0] = this.lastResult[0] || this.num1[0];
 		}
-		if (!this.operator[0] && !this.num2[0]) { //set up operation repeat, perform last operation on result and lastNum2
+		if (!this.operator[0] && !this.num2[0] && this.lastResult[0]) { //set up operation repeat, perform last operation on result and lastNum2
 			this.num1[0] = this.lastResult[0] || '0';
 			this.operator[0] = this.lastOperator[0];
 			this.num2[0] = this.lastnum2[0];
@@ -59,7 +59,10 @@ class Model {
 			this.error[0] = 'cannot divide by zero';
 			return this.giveProps();
 		}
-		this.doMath(this.num1[0], this.num2[0], this.operator[0]);
+		if(this.num1[0] && this.num2[0] && this.operator[0]){
+			this.doMath(this.num1[0], this.num2[0], this.operator[0]);
+			return this.giveProps();
+		}
 		return this.giveProps();
 	}
 	doMath(num1, num2, op){ //
@@ -89,14 +92,16 @@ class Model {
 		this.lastnum2 = this.num2;
 		this.lastOperator = this.operator;
 	}
-	resetInputs() {
-		this.num1 = ['0'];
-		this.operator = [''];
-		this.num2 = [''];
-		this.result = [''];
-		this.currentInput = this.num1;
-		this.error = [''];
-		return this.giveProps();
+	resetInputs(response) {
+		if(response === true){
+			this.num1 = ['0'];
+			this.operator = [''];
+			this.num2 = [''];
+			this.result = [''];
+			this.currentInput = this.num1;
+			this.error = [''];
+			return this.giveProps();
+		}
 	}
 	clearEntry() {
 		if (this.currentInput[0] && this.currentInput === this.num2){
@@ -166,7 +171,8 @@ class View {
 	}
 	displayResult(num){
 		if(num.error[0]){
-			return this.mainDisplay.text(num.error)
+			this.mainDisplay.text(num.error);
+			return true;
 		}
 		if(num.result[0]){
 			this.mainDisplay.text(this.roundDisplayNum(num.result[0]));
@@ -174,6 +180,10 @@ class View {
 			this.clearHistory(false);
 			this.printHistory(this.historyArray);
 			this.historyScrollTop();
+			return true
+		}
+		if(!num.result[0] && !num.error[0]){
+			return false;
 		}
 	}
 }
@@ -185,16 +195,11 @@ class Controller {
 	}
 	handleKeyPress(e) {
 		if(e.which==13){
-			this.display.displayResult(
-				this.calculator.equals()
+			this.calculator.resetInputs(
+				this.display.displayResult(
+					this.calculator.equals()
+				)
 			);
-			return this.calculator.resetInputs();
-		}
-		if(e.which==13){
-			this.display.displayResult(
-				this.calculator.equals()
-			);
-			return this.calculator.resetInputs();
 		}
 		this.display.updateDisplay(
 			this.calculator.makeArgs(String.fromCharCode(e.which))
@@ -218,15 +223,16 @@ class Controller {
 			)
 		});
 		$('#equal_btn').on('click', () => {
-			this.display.displayResult(
-				this.calculator.equals()
+			this.calculator.resetInputs(
+				this.display.displayResult(
+					this.calculator.equals()
+				)
 			);
-			this.calculator.resetInputs();
 		});
 		$('#clear_btn').on('click', () => {
 			this.calculator = new Model;
 			this.display.updateDisplay(
-				this.calculator.resetInputs()
+				this.calculator.resetInputs(true)
 			);
 		});
 		$('#clearEntry_btn').on('click', () => {
