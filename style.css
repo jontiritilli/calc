@@ -5,193 +5,53 @@
 	box-sizing: border-box;
 }
 html {
-	margin: 0;
 	font-family: 'Inconsolata', monospace;
-	font-size: 16px;
+	font-size: 10px;
 }
 body {
-	background-color: #2892D7;
+  margin: 0;
+  padding: 0;
+	background: #B191FF;
 	height: 100vh;
-	width: 100vw;
-}
-.col {
-	margin-bottom: 5px;
-}
-.row {
-	margin-bottom: 0;
-}
-.row.view {
-	margin-bottom: 2%;
-}
-/* Header Styles */
-.card {
-	background-color: #320E3B;
+  width: 100vw;
+  overflow: hidden;
 }
 .head {
-	color: #5DD9C1;
-	font-family: 'Arvo', serif;
-	font-size: 6vmin;
-	font-style: italic;
-	font-weight: bold;
-	text-shadow: 1px 1px 4px rgba(0, 0, 0, .6);
+  margin: 5% 5% 0% 5%;
+  font-size: 5rem;
+  text-align: center;
 }
-@media (max-width: 600px){
-	.head {
-		font-size: 7vmin;
-	}
+.calculator {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10%;
 }
-/* Calculator Styles */
-.main {
-	background-color: #320E3B;
-	border-radius: 2px;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-	margin: auto;
-	max-width: 480px;
-	-webkit-transition: -webkit-box-shadow .25s;
-	transition: -webkit-box-shadow .25s;
-	transition: box-shadow .25s;
-	transition: box-shadow .25s, -webkit-box-shadow .25s;
+.container {
+  display: inherit;
+  flex-wrap: wrap;
 }
-@media (min-width: 600px) {
-	.row .col .num-card {
-		padding-right: 0;
-	}
+#display {
+  display: inherit;
+  background: #ffffff;
+  font-size: 4rem;
+  padding: 2%;
+  margin: 1%;
 }
-.view {
-	background-color: #6DAEDB;
-	border-radius: 2px;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-	color: white;
-	font-size: 33px;
-	margin-top: 5px;
-	text-align: right;
-}
-/* History Log Styles */
-.log {
-	background-color: #DBFCFF;
-	border-radius: 2px;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-	color: white;
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	font-size: 3vmin;
-	height: 320px;
-	position: relative;
-}
-@media (max-width: 600px){
-	.log {
-		height: 250px;
-	}
-}
-.history-title {
-	background-color: #621b73;
-	border-radius: 2px;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-	margin-top: 2px;
-	width: 96px;
-	font-size: 1.5rem;
-}
-.history-title>span {
-	margin-left: 2px;
-}
-.history_divider {
-	max-width: 500px;
-	background-color: #621b73;
-	min-height: 1px;
-	margin: 1px 0 2px 0;
-}
-.history {
-	display: flex;
-	flex-direction: column-reverse;
-	height: 240px;
-	overflow: auto;
-	word-wrap: break-word;
-}
-@media (max-width:600px) {
-	.history {
-		display: flex;
-		font-size: 4vmin;
-		flex-direction: column-reverse;
-		height: 178px;
-		overflow: auto;
-	}
-}
-.history_item {
-	color: #320E3B;
-	font-size: 5vmin;
-	margin: 0;
-}
-@media (min-width: 600px){
-	.history_item {
-		font-size: 1.1rem;
-		margin: 0;
-	}
-}
-/* Buttons Styles*/
 .btn {
-	border-radius: 2px !important;
-	height: 60px !important;
+  width: 23%;
+  height: 60px;
+  font-size: 2rem;
+  color: #B191FF;
+  background: #BD2D87;
+  border: none;
+  margin: 1%;
+  padding: 5px;
 }
-.btn:focus {
-	background-color: white !important;
+.btn:hover {
+  cursor: pointer;
+  border: 1px red solid;
+  color: black;
 }
-.clear_history {
-	background-color: #B71C1C;
-	bottom: 0;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
-	font-size: 1.6rem;
-}
-.clear_history:focus {
-	background-color: #B71C1C !important;
-}
-#divide_btn,
-#clearEntry_btn,
-#clear_btn {
-	margin-left: 2.777777778%;
-}
-#clearEntry_btn,
-#clear_btn {
-	font-size: 1.5rem;
-}
-#clear_btn {
-	background-color: #B71C1C;
-}
-#clear_btn:focus {
-	background-color: #B71C1C !important;
-}
-#clearEntry_btn {
-	color: black;
-	background-color: #5DD9C1;
-}
-#clearEntry_btn:focus {
-	background-color: #5DD9C1 !important;
-}
-.op_btn {
-	background-color: #621b73;
-	font-size: 1.6rem;
-	margin-left: 5px;
-}
-.op_btn:focus {
-	background-color: #621b73 !important;
-}
-.nums,
-.ops {
-	background-color: #DBFCFF;
-	color: black;
-	font-size: 1.6rem;
-}
-.nums:focus,
-.ops:focus {
-	background-color: #DBFCFF !important;
-}
-.num_btn:hover,
-.op_btn:hover,
-.plus_minus:hover,
-#clearEntry_btn:hover,
-#clear_btn:hover,
-.clear_history:hover {
-	background-color: rgba(50, 14, 59, .8) !important;
-	color: white;
-	cursor: pointer;
+.clear_btn {
+  width: 35.5%;
 }
